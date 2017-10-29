@@ -15,7 +15,7 @@ var port = process.env.PORT || 8080,
 
 if (mongoURL == null) {
   var mongoHost = 'localhost',
-      mongoPort = 8000,
+      mongoPort = 27017,
       mongoDatabase = 'bodyfailscore',
       mongoPassword = null,
       mongoUser = null;
