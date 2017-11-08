@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- <title>three.js webgl - geometry - spline extrusion</title> -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -25,21 +24,10 @@
 	<body>
 
 		<div id="container"></div>
-		<!-- <div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - geometry - spline extrusion examples by <a href="http://www.lab4games.net/zz85/blog" target="_blank" rel="noopener">zz85</a></div> -->
-
 		<script src="/libs/three.min.js"></script>
-		<!-- <script src="js/controls/OrbitControls.js"></script> -->
-
-		<!-- where curves formulas are defined -->
-
-		<!-- <script src="js/CurveExtras.js"></script> -->
-
-		<!-- <script src="js/libs/stats.min.js"></script> -->
-		<!-- <script src="js/libs/dat.gui.min.js"></script> -->
-
 		<script>
-		var container, stats;
-		var camera, scene, renderer, splineCamera, cameraHelper, cameraEye;
+		var container;
+		var camera, scene, renderer, splineCamera;
 		var binormal = new THREE.Vector3();
 		var normal = new THREE.Vector3();
 		var pipeSpline = new THREE.CatmullRomCurve3( [
@@ -69,27 +57,13 @@
 		sampleClosedSpline.closed = false;
 		// Keep a dictionary of Curve instances
 		var splines = {
-			<!-- GrannyKnot: new THREE.Curves.GrannyKnot(), -->
-			<!-- HeartCurve: new THREE.Curves.HeartCurve( 3.5 ), -->
-			<!-- VivianiCurve: new THREE.Curves.VivianiCurve( 70 ), -->
-			<!-- KnotCurve: new THREE.Curves.KnotCurve(), -->
-			<!-- HelixCurve: new THREE.Curves.HelixCurve(), -->
-			<!-- TrefoilKnot: new THREE.Curves.TrefoilKnot(), -->
-			<!-- TorusKnot: new THREE.Curves.TorusKnot( 20 ), -->
-			<!-- CinquefoilKnot: new THREE.Curves.CinquefoilKnot( 20 ), -->
-			<!-- TrefoilPolynomialKnot: new THREE.Curves.TrefoilPolynomialKnot( 14 ), -->
-			<!-- FigureEightPolynomialKnot: new THREE.Curves.FigureEightPolynomialKnot(), -->
-			<!-- DecoratedTorusKnot4a: new THREE.Curves.DecoratedTorusKnot4a(), -->
-			<!-- DecoratedTorusKnot4b: new THREE.Curves.DecoratedTorusKnot4b(), -->
-			<!-- DecoratedTorusKnot5a: new THREE.Curves.DecoratedTorusKnot5a(), -->
-			<!-- DecoratedTorusKnot5c: new THREE.Curves.DecoratedTorusKnot5c(), -->
 			PipeSpline: pipeSpline,
 			SampleClosedSpline: sampleClosedSpline
 		};
 		var parent, tubeGeometry, group;
 		var params = {
 			spline: 'PipeSpline',
-			scale: 4,
+			scale: 0.5,
 			extrusionSegments: 150,
 			radiusSegments: 2,
 			closed: false,
@@ -99,14 +73,101 @@
 		};
 		var material = new THREE.MeshLambertMaterial( { color: 0xff00ff } );
 		var wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: false, transparent: true } );
-		function addTube() {
-			if ( group !== undefined ) {
-				parent.remove( group );
-				group.children[ 0 ].geometry.dispose();
-				group.children[ 1 ].geometry.dispose();
-			}
-			var extrudePath = splines[ params.spline ];
+		var jsonDataBaseFile = JSON.parse(fs.readFileSync("bodyfail.json"));
+		function addTube(x, y, index) {
+			var jsonDataBase = jsonDataBaseFile[index];
+			var extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n0.x, jsonDataBase.skeleton.n0.y, jsonDataBase.skeleton.n0.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n1.x, jsonDataBase.skeleton.n1.y, jsonDataBase.skeleton.n1.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n20.x, jsonDataBase.skeleton.n20.y, jsonDataBase.skeleton.n20.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n2.x, jsonDataBase.skeleton.n2.y, jsonDataBase.skeleton.n2.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n3.x, jsonDataBase.skeleton.n3.y, jsonDataBase.skeleton.n3.z),
+
+			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n8.x, jsonDataBase.skeleton.n8.y, jsonDataBase.skeleton.n8.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n9.x, jsonDataBase.skeleton.n9.y, jsonDataBase.skeleton.n9.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n10.x, jsonDataBase.skeleton.n10.y, jsonDataBase.skeleton.n10.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n11.x, jsonDataBase.skeleton.n11.y, jsonDataBase.skeleton.n11.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n23.x, jsonDataBase.skeleton.n23.y, jsonDataBase.skeleton.n23.z),
+
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n4.x, jsonDataBase.skeleton.n4.y, jsonDataBase.skeleton.n4.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n5.x, jsonDataBase.skeleton.n5.y, jsonDataBase.skeleton.n5.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n6.x, jsonDataBase.skeleton.n6.y, jsonDataBase.skeleton.n6.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n7.x, jsonDataBase.skeleton.n7.y, jsonDataBase.skeleton.n7.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n21.x, jsonDataBase.skeleton.n21.y, jsonDataBase.skeleton.n21.z),
+
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n8.x, jsonDataBase.skeleton.n8.y, jsonDataBase.skeleton.n8.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n20.x, jsonDataBase.skeleton.n20.y, jsonDataBase.skeleton.n20.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n4.x, jsonDataBase.skeleton.n4.y, jsonDataBase.skeleton.n4.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n16.x, jsonDataBase.skeleton.n16.y, jsonDataBase.skeleton.n16.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n0.x, jsonDataBase.skeleton.n0.y, jsonDataBase.skeleton.n0.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n12.x, jsonDataBase.skeleton.n12.y, jsonDataBase.skeleton.n12.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n16.x, jsonDataBase.skeleton.n16.y, jsonDataBase.skeleton.n16.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n17.x, jsonDataBase.skeleton.n17.y, jsonDataBase.skeleton.n17.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n18.x, jsonDataBase.skeleton.n18.y, jsonDataBase.skeleton.n18.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n12.x, jsonDataBase.skeleton.n12.y, jsonDataBase.skeleton.n12.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n13.x, jsonDataBase.skeleton.n13.y, jsonDataBase.skeleton.n13.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n14.x, jsonDataBase.skeleton.n14.y, jsonDataBase.skeleton.n14.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n10.x, jsonDataBase.skeleton.n10.y, jsonDataBase.skeleton.n10.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n24.x, jsonDataBase.skeleton.n24.y, jsonDataBase.skeleton.n24.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n6.x, jsonDataBase.skeleton.n6.y, jsonDataBase.skeleton.n6.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n22.x, jsonDataBase.skeleton.n22.y, jsonDataBase.skeleton.n22.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n18.x, jsonDataBase.skeleton.n18.y, jsonDataBase.skeleton.n18.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n19.x, jsonDataBase.skeleton.n19.y, jsonDataBase.skeleton.n19.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			addGeometry( tubeGeometry );
+			extrudePath = new THREE.CatmullRomCurve3([
+				new THREE.Vector3(jsonDataBase.skeleton.n14.x, jsonDataBase.skeleton.n14.y, jsonDataBase.skeleton.n14.z),
+				new THREE.Vector3(jsonDataBase.skeleton.n15.x, jsonDataBase.skeleton.n15.y, jsonDataBase.skeleton.n15.z),
+			]);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
 			addGeometry( tubeGeometry );
 			setScale();
 		}
@@ -118,12 +179,8 @@
 			group = THREE.SceneUtils.createMultiMaterialObject( geometry, [ material, wireframeMaterial ] );
 			parent.add( group );
 		}
-		function animateCamera() {
-			cameraHelper.visible = params.cameraHelper;
-			cameraEye.visible = params.cameraHelper;
-		}
 		init();
-		animate();
+		render();
 		function init() {
 			container = document.getElementById( 'container' );
 			// camera
@@ -141,38 +198,21 @@
 			scene.add( parent );
 			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
 			parent.add( splineCamera );
-			cameraHelper = new THREE.CameraHelper( splineCamera );
-			scene.add( cameraHelper );
-			addTube();
-			// debug camera
-			cameraEye = new THREE.Mesh( new THREE.SphereGeometry( 5 ), new THREE.MeshBasicMaterial( { color: 0xdddddd } ) );
-			parent.add( cameraEye );
-			cameraHelper.visible = params.cameraHelper;
-			cameraEye.visible = params.cameraHelper;
+			var index = 0;
+			for (var i = 0; i < 10; i++)
+			{
+				for (var j = 0; j < 5; j++)
+				{
+					addTube(i, j, index);
+					index++;
+				}
+			}
 			// renderer
 			renderer = new THREE.WebGLRenderer( { antialias: true } );
 			renderer.setPixelRatio( window.devicePixelRatio );
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			container.appendChild( renderer.domElement );
-			// stats
-			<!-- stats = new Stats(); -->
-			<!-- container.appendChild( stats.dom ); -->
-			<!-- // dat.GUI -->
-			<!-- var gui = new dat.GUI( { width: 300 } ); -->
-			<!-- var folderGeometry = gui.addFolder( 'Geometry' ); -->
-			<!-- folderGeometry.add( params, 'spline', Object.keys( splines ) ).onChange( function( value ) { addTube(); } ); -->
-			<!-- folderGeometry.add( params, 'scale', 2, 10 ).step( 2 ).onChange( function( value ) { setScale(); } ); -->
-			<!-- folderGeometry.add( params, 'extrusionSegments', 50, 500 ).step( 50 ).onChange( function( value ) { addTube(); } ); -->
-			<!-- folderGeometry.add( params, 'radiusSegments', 2, 12 ).step( 1 ).onChange( function( value ) { addTube(); } ); -->
-			<!-- folderGeometry.add( params, 'closed').onChange( function( value ) { addTube(); } ); -->
-			<!-- folderGeometry.open(); -->
-			<!-- var folderCamera = gui.addFolder( 'Camera' ); -->
-			<!-- folderCamera.add( params, 'animationView').onChange( function( value ) { animateCamera( true ); } ); -->
-			<!-- folderCamera.add( params, 'lookAhead').onChange( function( value ) { animateCamera(); } ); -->
-			<!-- folderCamera.add( params, 'cameraHelper').onChange( function( value ) { animateCamera(); } ); -->
-			<!-- folderCamera.open(); -->
-			<!-- // controls -->
-			<!-- var controls = new THREE.OrbitControls( camera, renderer.domElement ); -->
+
 			// event listener
 			window.addEventListener( 'resize', onWindowResize, false );
 		}
@@ -180,12 +220,6 @@
 			camera.aspect = window.innerWidth / window.innerHeight;
 			camera.updateProjectionMatrix();
 			renderer.setSize( window.innerWidth, window.innerHeight );
-		}
-		//
-		function animate() {
-			requestAnimationFrame( animate );
-			render();
-			<!-- stats.update(); -->
 		}
 		function render() {
 			// animate camera along spline
@@ -207,14 +241,13 @@
 			// we move on a offset on its binormal
 			pos.add( normal.clone().multiplyScalar( offset ) );
 			splineCamera.position.copy( pos );
-			cameraEye.position.copy( pos );
 			// using arclength for stablization in look ahead
 			var lookAt = tubeGeometry.parameters.path.getPointAt( ( t + 30 / tubeGeometry.parameters.path.getLength() ) % 1 ).multiplyScalar( params.scale );
 			// camera orientation 2 - up orientation via normal
 			if ( ! params.lookAhead ) lookAt.copy( pos ).add( dir );
 			splineCamera.matrix.lookAt( splineCamera.position, lookAt, normal );
 			splineCamera.rotation.setFromRotationMatrix( splineCamera.matrix, splineCamera.rotation.order );
-			cameraHelper.update();
+//			cameraHelper.update();
 			renderer.render( scene, params.animationView === true ? splineCamera : camera );
 		}
 	</script>

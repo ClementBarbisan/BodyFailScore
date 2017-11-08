@@ -1,6 +1,7 @@
 var express = require('express'),
     app     = express(),
-    morgan  = require('morgan');
+    morgan  = require('morgan'),
+    fs      = require('fs');
     
 Object.assign=require('object-assign')
 
@@ -91,37 +92,13 @@ app.get('/addSample', function(req, res)
 												n24:[{x:req.query.n24x, y:req.query.n24y, z:req.query.n24z}],
 												n25:[{x:req.query.n25x, y:req.query.n25y, z:req.query.n25z}]
 		}]});
+        var json = JSON.stringify(db.col.find().sort({"datetime": -1}).limit(50));
+        fs.writeFile('bodyfail.json', json, 'utf8');
 	}
 });
 
 app.get('/', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (db) {
-    var col = db.collection('counts');
-    // Create a document with request IP and current time of request
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
-    });
-  } else {
-    res.render('index.html', { pageCountMessage : null});
-  }
-});
-
-app.get('/pagecount', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
-    });
-  } else {
-    res.send('{ pageCount: -1 }');
-  }
+    res.render('index.html');
 });
 
 // error handling
