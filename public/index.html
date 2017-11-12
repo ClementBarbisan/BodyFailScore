@@ -25,149 +25,138 @@
 
 		<div id="container"></div>
 		<script src="/libs/three.min.js"></script>
+		<script src="/libs/jquery-3.2.1.min.js"></script>
+		<script src="bodyfail.json"></script>
 		<script>
+		var jsonDataBaseFile = [];
+		$.getJSON("bodyfail.json", function(data)
+		{
+			jsonDataBaseFile = data;
+			init();
+			render();
+		})
 		var container;
 		var camera, scene, renderer, splineCamera;
 		var binormal = new THREE.Vector3();
 		var normal = new THREE.Vector3();
-		var pipeSpline = new THREE.CatmullRomCurve3( [
-				new THREE.Vector3( 0, 10, -10 ), new THREE.Vector3( 10, 0, -10 ),
-				new THREE.Vector3( 20, 0, 0 ), new THREE.Vector3( 30, 0, 10 ),
-				new THREE.Vector3( 30, 0, 20 ), new THREE.Vector3( 20, 0, 30 ),
-				new THREE.Vector3( 10, 0, 30 ), new THREE.Vector3( 0, 0, 30 ),
-				new THREE.Vector3( -10, 10, 30 ), new THREE.Vector3( -10, 20, 30 ),
-				new THREE.Vector3( 0, 30, 30 ), new THREE.Vector3( 10, 30, 30 ),
-				new THREE.Vector3( 20, 30, 15 ), new THREE.Vector3( 10, 30, 10 ),
-				new THREE.Vector3( 0, 30, 10 ), new THREE.Vector3( -10, 20, 10 ),
-				new THREE.Vector3( -10, 10, 10 ), new THREE.Vector3( 0, 0, 10 ),
-				new THREE.Vector3( 10, -10, 10 ), new THREE.Vector3( 20, -15, 10 ),
-				new THREE.Vector3( 30, -15, 10 ), new THREE.Vector3( 40, -15, 10 ),
-				new THREE.Vector3( 50, -15, 10 ), new THREE.Vector3( 60, 0, 10 ),
-				new THREE.Vector3( 70, 0, 0 ), new THREE.Vector3( 80, 0, 0 ),
-				new THREE.Vector3( 90, 0, 0 ), new THREE.Vector3( 100, 0, 0 )
-		] );
-		var sampleClosedSpline = new THREE.CatmullRomCurve3( [
-			new THREE.Vector3( 0, -40, -40 ),
-			new THREE.Vector3( 0, 40, -40 ),
-			new THREE.Vector3( 0, 140, -40 ),
-			new THREE.Vector3( 0, 40, 40 ),
-			new THREE.Vector3( 0, -40, 40 )
-		] );
-		sampleClosedSpline.type = 'catmullrom';
-		sampleClosedSpline.closed = false;
-		// Keep a dictionary of Curve instances
-		var splines = {
-			PipeSpline: pipeSpline,
-			SampleClosedSpline: sampleClosedSpline
-		};
 		var parent, tubeGeometry, group;
 		var params = {
-			spline: 'PipeSpline',
-			scale: 0.5,
+			scale: 0.1,
 			extrusionSegments: 150,
-			radiusSegments: 2,
+			radiusSegments: 3,
 			closed: false,
 			animationView: false,
 			lookAhead: false,
 			cameraHelper: false,
 		};
-		var material = new THREE.MeshLambertMaterial( { color: 0xff00ff } );
+		var material = new THREE.MeshLambertMaterial( { color: 0x000000 } );
 		var wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: false, transparent: true } );
-		var jsonDataBaseFile = JSON.parse(fs.readFileSync("bodyfail.json"));
+
 		function addTube(x, y, index) {
+			console.log(index);
 			var jsonDataBase = jsonDataBaseFile[index];
 			var extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n0.x, jsonDataBase.skeleton.n0.y, jsonDataBase.skeleton.n0.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n1.x, jsonDataBase.skeleton.n1.y, jsonDataBase.skeleton.n1.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n20.x, jsonDataBase.skeleton.n20.y, jsonDataBase.skeleton.n20.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n2.x, jsonDataBase.skeleton.n2.y, jsonDataBase.skeleton.n2.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n3.x, jsonDataBase.skeleton.n3.y, jsonDataBase.skeleton.n3.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n0.x) * 30, parseFloat(jsonDataBase.skeleton.n0.y) * 30, parseFloat(jsonDataBase.skeleton.n0.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n1.x) * 30, parseFloat(jsonDataBase.skeleton.n1.y) * 30, parseFloat(jsonDataBase.skeleton.n1.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n20.x) * 30, parseFloat(jsonDataBase.skeleton.n20.y) * 30, parseFloat(jsonDataBase.skeleton.n20.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n2.x) * 30, parseFloat(jsonDataBase.skeleton.n2.y) * 30, parseFloat(jsonDataBase.skeleton.n2.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n3.x) * 30, parseFloat(jsonDataBase.skeleton.n3.y) * 30, parseFloat(jsonDataBase.skeleton.n3.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n8.x, jsonDataBase.skeleton.n8.y, jsonDataBase.skeleton.n8.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n9.x, jsonDataBase.skeleton.n9.y, jsonDataBase.skeleton.n9.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n10.x, jsonDataBase.skeleton.n10.y, jsonDataBase.skeleton.n10.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n11.x, jsonDataBase.skeleton.n11.y, jsonDataBase.skeleton.n11.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n23.x, jsonDataBase.skeleton.n23.y, jsonDataBase.skeleton.n23.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n9.x) * 30, parseFloat(jsonDataBase.skeleton.n9.y) * 30, parseFloat(jsonDataBase.skeleton.n9.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n11.x) * 30, parseFloat(jsonDataBase.skeleton.n11.y) * 30, parseFloat(jsonDataBase.skeleton.n11.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n23.x) * 30, parseFloat(jsonDataBase.skeleton.n23.y) * 30, parseFloat(jsonDataBase.skeleton.n23.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n4.x, jsonDataBase.skeleton.n4.y, jsonDataBase.skeleton.n4.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n5.x, jsonDataBase.skeleton.n5.y, jsonDataBase.skeleton.n5.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n6.x, jsonDataBase.skeleton.n6.y, jsonDataBase.skeleton.n6.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n7.x, jsonDataBase.skeleton.n7.y, jsonDataBase.skeleton.n7.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n21.x, jsonDataBase.skeleton.n21.y, jsonDataBase.skeleton.n21.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n5.x) * 30, parseFloat(jsonDataBase.skeleton.n5.y) * 30, parseFloat(jsonDataBase.skeleton.n5.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n7.x) * 30, parseFloat(jsonDataBase.skeleton.n7.y) * 30, parseFloat(jsonDataBase.skeleton.n7.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n21.x) * 30, parseFloat(jsonDataBase.skeleton.n21.y) * 30, parseFloat(jsonDataBase.skeleton.n21.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n8.x, jsonDataBase.skeleton.n8.y, jsonDataBase.skeleton.n8.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n20.x, jsonDataBase.skeleton.n20.y, jsonDataBase.skeleton.n20.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n4.x, jsonDataBase.skeleton.n4.y, jsonDataBase.skeleton.n4.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n20.x) * 30, parseFloat(jsonDataBase.skeleton.n20.y) * 30, parseFloat(jsonDataBase.skeleton.n20.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n16.x, jsonDataBase.skeleton.n16.y, jsonDataBase.skeleton.n16.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n0.x, jsonDataBase.skeleton.n0.y, jsonDataBase.skeleton.n0.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n12.x, jsonDataBase.skeleton.n12.y, jsonDataBase.skeleton.n12.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n0.x) * 30, parseFloat(jsonDataBase.skeleton.n0.y) * 30, parseFloat(jsonDataBase.skeleton.n0.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n16.x, jsonDataBase.skeleton.n16.y, jsonDataBase.skeleton.n16.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n17.x, jsonDataBase.skeleton.n17.y, jsonDataBase.skeleton.n17.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n18.x, jsonDataBase.skeleton.n18.y, jsonDataBase.skeleton.n18.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n17.x) * 30, parseFloat(jsonDataBase.skeleton.n17.y) * 30, parseFloat(jsonDataBase.skeleton.n17.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n12.x, jsonDataBase.skeleton.n12.y, jsonDataBase.skeleton.n12.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n13.x, jsonDataBase.skeleton.n13.y, jsonDataBase.skeleton.n13.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n14.x, jsonDataBase.skeleton.n14.y, jsonDataBase.skeleton.n14.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n13.x) * 30, parseFloat(jsonDataBase.skeleton.n13.y) * 30, parseFloat(jsonDataBase.skeleton.n13.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n10.x, jsonDataBase.skeleton.n10.y, jsonDataBase.skeleton.n10.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n24.x, jsonDataBase.skeleton.n24.y, jsonDataBase.skeleton.n24.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n6.x, jsonDataBase.skeleton.n6.y, jsonDataBase.skeleton.n6.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n22.x, jsonDataBase.skeleton.n22.y, jsonDataBase.skeleton.n22.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n18.x, jsonDataBase.skeleton.n18.y, jsonDataBase.skeleton.n18.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n19.x, jsonDataBase.skeleton.n19.y, jsonDataBase.skeleton.n19.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
-				new THREE.Vector3(jsonDataBase.skeleton.n14.x, jsonDataBase.skeleton.n14.y, jsonDataBase.skeleton.n14.z),
-				new THREE.Vector3(jsonDataBase.skeleton.n15.x, jsonDataBase.skeleton.n15.y, jsonDataBase.skeleton.n15.z),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
+				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 190 - 900, y * (-200) + 500, 0);
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+
 			addGeometry( tubeGeometry );
 			setScale();
 		}
@@ -179,8 +168,7 @@
 			group = THREE.SceneUtils.createMultiMaterialObject( geometry, [ material, wireframeMaterial ] );
 			parent.add( group );
 		}
-		init();
-		render();
+
 		function init() {
 			container = document.getElementById( 'container' );
 			// camera
@@ -199,9 +187,9 @@
 			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
 			parent.add( splineCamera );
 			var index = 0;
-			for (var i = 0; i < 10; i++)
+			for (var i = 0; i < 10 && index < jsonDataBaseFile.length; i++)
 			{
-				for (var j = 0; j < 5; j++)
+				for (var j = 0; j < 5 && index < jsonDataBaseFile.length; j++)
 				{
 					addTube(i, j, index);
 					index++;
