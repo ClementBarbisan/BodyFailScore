@@ -36,7 +36,7 @@
 			render();
 		})
 		var container;
-		var camera, scene, renderer, splineCamera;
+		var camera, scene, renderer;
 		var binormal = new THREE.Vector3();
 		var normal = new THREE.Vector3();
 		var parent, tubeGeometry, group;
@@ -64,7 +64,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -75,7 +75,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -87,7 +87,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -96,7 +96,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -105,7 +105,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -114,7 +114,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -123,7 +123,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -131,7 +131,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -139,7 +139,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -147,7 +147,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -155,7 +155,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 110 - 500, y * (-90) + 225, 0);
+			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
 			setScale();
@@ -172,8 +172,8 @@
 		function init() {
 			container = document.getElementById( 'container' );
 			// camera
-			camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.01, 10000 );
-			camera.position.set( 0, 50, 500 );
+			camera = new THREE.OrthographicCamera( window.innerWidth / 30, window.innerWidth - window.innerWidth / 6, window.innerHeight - window.innerHeight / 10,  window.innerHeight / 10, 0, 10000 );
+			camera.position.set( 0, 0, 100 );
 			// scene
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color( 0xf0f0f0 );
@@ -184,12 +184,12 @@
 			// tube
 			parent = new THREE.Object3D();
 			scene.add( parent );
-			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
-			parent.add( splineCamera );
+//			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
+//			parent.add( splineCamera );
 			var index = 0;
-			for (var i = 0; i < 10 && index < jsonDataBaseFile.length; i++)
+			for (var i = 1; i <= 10 && index < jsonDataBaseFile.length; i++)
 			{
-				for (var j = 0; j < 5 && index < jsonDataBaseFile.length; j++)
+				for (var j = 1; j <= 5 && index < jsonDataBaseFile.length; j++)
 				{
 					addTube(i, j, index);
 					index++;
@@ -205,8 +205,8 @@
 			window.addEventListener( 'resize', onWindowResize, false );
 		}
 		function onWindowResize() {
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
+//			camera.aspect = window.innerWidth / window.innerHeight;
+//			camera.updateProjectionMatrix();
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		}
 		function render() {
@@ -228,13 +228,13 @@
 			normal.copy( binormal ).cross( dir );
 			// we move on a offset on its binormal
 			pos.add( normal.clone().multiplyScalar( offset ) );
-			splineCamera.position.copy( pos );
+//			splineCamera.position.copy( pos );
 			// using arclength for stablization in look ahead
 			var lookAt = tubeGeometry.parameters.path.getPointAt( ( t + 30 / tubeGeometry.parameters.path.getLength() ) % 1 ).multiplyScalar( params.scale );
 			// camera orientation 2 - up orientation via normal
 			if ( ! params.lookAhead ) lookAt.copy( pos ).add( dir );
-			splineCamera.matrix.lookAt( splineCamera.position, lookAt, normal );
-			splineCamera.rotation.setFromRotationMatrix( splineCamera.matrix, splineCamera.rotation.order );
+//			splineCamera.matrix.lookAt( splineCamera.position, lookAt, normal );
+//			splineCamera.rotation.setFromRotationMatrix( splineCamera.matrix, splineCamera.rotation.order );
 //			cameraHelper.update();
 			renderer.render( scene, params.animationView === true ? splineCamera : camera );
 		}
