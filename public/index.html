@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="30">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
@@ -42,7 +43,7 @@
 		var parent, tubeGeometry, group;
 		var params = {
 			scale: 0.1,
-			extrusionSegments: 150,
+			extrusionSegments: 10,
 			radiusSegments: 3,
 			closed: false,
 			animationView: false,
@@ -63,7 +64,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n3.x) * 30, parseFloat(jsonDataBase.skeleton.n3.y) * 30, parseFloat(jsonDataBase.skeleton.n3.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
@@ -74,7 +75,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n23.x) * 30, parseFloat(jsonDataBase.skeleton.n23.y) * 30, parseFloat(jsonDataBase.skeleton.n23.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -86,7 +87,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n21.x) * 30, parseFloat(jsonDataBase.skeleton.n21.y) * 30, parseFloat(jsonDataBase.skeleton.n21.z) * 10),
 
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -95,7 +96,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n20.x) * 30, parseFloat(jsonDataBase.skeleton.n20.y) * 30, parseFloat(jsonDataBase.skeleton.n20.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -104,7 +105,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n0.x) * 30, parseFloat(jsonDataBase.skeleton.n0.y) * 30, parseFloat(jsonDataBase.skeleton.n0.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -113,7 +114,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n17.x) * 30, parseFloat(jsonDataBase.skeleton.n17.y) * 30, parseFloat(jsonDataBase.skeleton.n17.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -122,7 +123,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n13.x) * 30, parseFloat(jsonDataBase.skeleton.n13.y) * 30, parseFloat(jsonDataBase.skeleton.n13.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -130,7 +131,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -138,7 +139,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -146,7 +147,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -154,7 +155,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
-			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed );
+			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
 			tubeGeometry.translate(x * 100, y * (90), 0);
 
 			addGeometry( tubeGeometry );
@@ -172,7 +173,7 @@
 		function init() {
 			container = document.getElementById( 'container' );
 			// camera
-			camera = new THREE.OrthographicCamera( window.innerWidth / 30, window.innerWidth - window.innerWidth / 6, window.innerHeight - window.innerHeight / 10,  window.innerHeight / 10, 0, 10000 );
+			camera = new THREE.OrthographicCamera( window.innerWidth / 30, window.innerWidth - window.innerWidth / 6, window.innerHeight - window.innerHeight / 6,  window.innerHeight / 30, 0, 10000 );
 			camera.position.set( 0, 0, 100 );
 			// scene
 			scene = new THREE.Scene();
