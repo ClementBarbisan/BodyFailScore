@@ -181,6 +181,9 @@
     </div>
     <script>
         window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
+        window.addEventListener('resize', function() {
+            window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
+        });
         var timer;
         var videoUp = ["videoUp1.html","videoUp2.html"];
         var videoUpIndex = 0;
