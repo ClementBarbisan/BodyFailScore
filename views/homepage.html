@@ -264,12 +264,14 @@
                     else
                         element2[0].src = "nothingMore.html";
                 }
-
+                bubbleIframeMouseMove(document.getElementById('homePage'));
                 setTimeout(function() {
                     element1.css({'visibility': 'visible'});
-                    element1.removeClass('noTransition');
-                    element2.removeClass('noTransition');
-                    bubbleIframeMouseMove(document.getElementById(id1));
+                    setTimeout(function(){
+                        element1.removeClass('noTransition');
+                        element2.removeClass('noTransition');
+                        bubbleIframeMouseMove(document.getElementById('homePage'));
+                    }, 200);
                 }, 50);
             }, 1950);
         }
@@ -306,9 +308,11 @@
                     element2[0].src = "nothingMore.html";
                 setTimeout(function() {
                     element1.css({'visibility': 'visible'});
-                    element1.removeClass('noTransition');
-                    element2.removeClass('noTransition');
-                    bubbleIframeMouseMove(document.getElementById(id1));
+                    setTimeout(function(){
+                        element1.removeClass('noTransition');
+                        element2.removeClass('noTransition');
+                        bubbleIframeMouseMove(document.getElementById('homePage'));
+                    }, 200);
                 }, 50);
             }, 1950);
         }
