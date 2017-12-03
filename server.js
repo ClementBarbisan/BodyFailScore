@@ -8,6 +8,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use(express.static(__dirname + '/public'));
+app.set('views', __dirname + '/views');
 
 var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0',
