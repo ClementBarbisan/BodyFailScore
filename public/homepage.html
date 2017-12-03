@@ -36,48 +36,34 @@
     }
 
     .defile:hover {
-        display: inline;
         -webkit-animation:linear marqueelike 30s infinite ;
         -moz-animation:linear marqueelike 30s infinite ;
         -o-animation:linear marqueelike 30s infinite ;
         -ms-animation:linear marqueelike 30s infinite ;
         animation:linear marqueelike 30s infinite ;
-        margin-left:-100%;
-        padding:0 5px;
-        text-align:left;
-        height:17px;
-        white-space:nowrap;
-        overflow: hidden;
-    }
-
-    .defile:after {
-        content:attr(data-text);
-        position:absolute;
-        white-space:nowrap;
-        padding-left:10px;
-        overflow: hidden;
     }
 
     @-webkit-keyframes marqueelike {
-        0%, 100% {margin-left:0;}
+        0%, 100% {margin-left:100%;}
         99.99% {margin-left:-100%;}
     }
     @-moz-keyframes marqueelike {
-        0%, 100% {margin-left:0;}
+        0%, 100% {margin-left:100%;}
         99.99% {margin-left:-100%;}
     }
     @-o-keyframes marqueelike {
-        0%, 100% {margin-left:0;}
+        0%, 100% {margin-left:100%;}
         99.99% {margin-left:-100%;}
     }
     @-ms-keyframes marqueelike {
-        0%, 100% {margin-left:0;}
+        0%, 100% {margin-left:100%;}
         99.99% {margin-left:-100%;}
     }
     @keyframes marqueelike {
-        0%, 100% {margin-left:0;}
+        0%, 100% {margin-left:100%;}
         99.99% {margin-left:-100%;}
     }
+
 
     @media only screen and (max-width: 860px) {
         .defileParent {
@@ -102,18 +88,11 @@
             overflow: hidden;
         }
         .defile:hover {
-            display: inline;
             -webkit-animation:linear marqueelike 25s infinite ;
             -moz-animation:linear marqueelike 25s infinite ;
             -o-animation:linear marqueelike 25s infinite ;
             -ms-animation:linear marqueelike 25s infinite ;
             animation:linear marqueelike 25s infinite ;
-            margin-left:-100%;
-            padding:0 5px;
-            text-align:left;
-            height:17px;
-            white-space:nowrap;
-            overflow: hidden;
         }
     }
 
