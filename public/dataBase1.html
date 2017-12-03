@@ -142,7 +142,8 @@
 			var loader = new THREE.FontLoader();
 			loader.load( 'fonts/Verdana_Regular.json', function ( font ) {
 				init(font);
-				render();
+				if (jsonDataBaseFile.length > 0)
+					render();
 			} );
 
 		});
