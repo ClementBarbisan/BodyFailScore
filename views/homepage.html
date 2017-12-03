@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="/libs/jquery-3.2.1.min.js"></script>
+<style>
+    html
+    {
+        overflow: hidden;
+    }
+    iframe
+    {
+        position: absolute;
+        /*min-width: 500px;*/
+        /*max-width: 1500px;*/
+        width: 100%;
+        height: 100%;
+        -webkit-transition: -webkit-transform 2s ease-in-out;
+        -moz-transition: -moz-transform 2s ease-in-out;
+        -o-transition: -o-transform 2s ease-in-out;
+        transition: transform 2s ease-in-out;
+    }
+
+    .noTransition
+    {
+        -moz-transition: none;
+        -webkit-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
+    #upArrow
+    {
+    }
+    #upArrow img
+    {
+        vertical-align: top;
+        width: 100%; /* max width */
+    }
+    #downArrow
+    {
+
+    }
+    #downArrow img
+    {
+        vertical-align: top;
+        width: 100%; /* max width */
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    #rightArrow
+    {
+
+    }
+    #rightArrow img
+    {
+        vertical-align: top;
+        width: 100%; /* max width */
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    #leftArrow
+    {
+
+    }
+    #leftArrow img
+    {
+        vertical-align: top;
+        width: 100%; /* max width */
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+    #homePage
+    {
+        background: #00d4b4;
+        left: 100%;
+        top: 100%;
+    }
+    #videoUp1
+    {
+        background: #2F6FAD;
+        left:100%;
+        top:0%;
+    }
+    /*#videoUp2*/
+    /*{*/
+        /*background: #c09853;*/
+        /*left: 150%;*/
+        /*top: 0%;*/
+    /*}*/
+    #videoDown1
+    {
+        background: #b94a48;
+        left: 100%;
+        top: 200%;
+    }
+    /*#videoDown2*/
+    /*{*/
+        /*background: blue;*/
+        /*left: 150%;*/
+        /*top: 300%;*/
+    /*}*/
+    #documents1
+    {
+        background: aqua;
+        left: 200%;
+        top: 100%;
+    }
+    /*#documents2*/
+    /*{*/
+        /*background: blueviolet;*/
+        /*left: 300%;*/
+        /*top: 150%;*/
+    /*}*/
+    #dataBase1
+    {
+        background: chartreuse;
+        left: 0%;
+        top: 100%;
+    }
+    /*#dataBase2*/
+    /*{*/
+        /*background: darkcyan;*/
+        /*left: 0%;*/
+        /*top: 150%;*/
+    /*}*/
+    .arrow {
+        visibility: hidden;
+        opacity: 0;
+        transition: all .5s ease;
+        width: 5%;
+    }
+
+    .show {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <iframe id="videoUp1" src="videoUp1.html">
+    </iframe>
+    <!--<iframe id="videoUp2">-->
+    <!--</iframe>-->
+    <iframe id="videoDown1">
+    </iframe>
+    <!--<iframe id="videoDown2">-->
+    <!--</iframe>-->
+    <iframe id="documents1">
+    </iframe>
+    <!--<iframe id="documents2">-->
+    <!--</iframe>-->
+    <iframe id="homePage" src="homePage.html">
+    </iframe>
+    <iframe id="dataBase1">
+    </iframe>
+    <!--<iframe id="dataBase2">-->
+    <!--</iframe>-->
+    <div id="upArrow" class="arrow" style="position:fixed; top:0;left:50vw;transform: translate(-50%, 0);">
+        <img src="arrow.png">
+    </div>
+    <div id="downArrow" class="arrow" style="position:fixed; bottom:0; left:50vw; transform: translate(-50%, 0);">
+        <img src="arrow.png">
+    </div>
+    <div id="leftArrow" class="arrow" style="position:fixed; top:50vh; left:0;transform: translate(-25%, -50%);">
+        <img src="arrow.png">
+    </div>
+    <div id="rightArrow" class="arrow" style="position: fixed; top: 50vh; right:0;transform: translate(25%, -50%);">
+        <img src="arrow.png">
+    </div>
+    <script>
+        window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
+        var timer;
+        var videoUp = ["videoUp1.html","videoUp2.html"];
+        var videoUpIndex = 0;
+        var videoDown = ["videoDown1.html","videoDown2.html"];
+        var videoDownIndex = 0;
+        var dataBase = ["dataBase1.html", "dataBase2.html"];
+        var dataBaseIndex = 0;
+        var documents = ["documents1.html","documents2.html"];
+        var documentsIndex = 0;
+        $(window).on('mousemove', function () {
+            console.log("test");
+            $('.arrow').addClass('show');
+            try {
+                clearTimeout(timer);
+            } catch (e) {}
+            timer = setTimeout(function () {
+                $('.arrow').removeClass('show');
+            }, 500);
+        });
+        var bubbleIframeMouseMove = function( iframe ){
+
+            iframe.contentWindow.addEventListener('mousemove', function( event ) {
+                var boundingClientRect = iframe.getBoundingClientRect();
+
+                var evt = new CustomEvent( 'mousemove', {bubbles: true, cancelable: false})
+                evt.clientX = event.clientX + boundingClientRect.left;
+                evt.clientY = event.clientY + boundingClientRect.top;
+
+                iframe.dispatchEvent( evt );
+
+            });
+
+        };
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            xmlHttp.send(null);
+        }
+        var translateElementX = function(id1, id2, direction, array, index, isDataBase)
+        {
+            var element1 = $('#'+ id1);
+            var element2 = $('#'+ id2);
+            element1.css({"-webkit-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element2.css({"-webkit-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element1.css({"-moz-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element2.css({"-moz-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element1.css({"-o-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element2.css({"-o-transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element1.css({"transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            element2.css({"transform":"translate(" + 100 * direction + "vw, 0vh)"});
+            setTimeout(function()
+            {
+                element1.addClass('noTransition');
+                element2.addClass('noTransition');
+                element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                element1.css({"-moz-transform":"translate(0vw, 0vh)"});
+                element2.css({"-moz-transform":"translate(0vw, 0vh)"});
+                element1.css({"-o-transform":"translate(0vw, 0vh)"});
+                element2.css({"-o-transform":"translate(0vw, 0vh)"});
+                element1.css({"transform":"translate(0vw, 0vh)"});
+                element2.css({"transform":"translate(0vw, 0vh)"});
+                element1[0].src = element2[0].src;
+                if (isDataBase)
+                {
+                    element2[0].src = array[index % 2];
+                }
+                else
+                {
+                    if (array[index])
+                        element2[0].src = array[index];
+                    else
+                        element2[0].src = "nothingMore.html";
+                }
+
+                setTimeout(function() {
+                    element1.removeClass('noTransition');
+                    element2.removeClass('noTransition');
+                    bubbleIframeMouseMove(document.getElementById(id1));
+                }, 100);
+            }, 1950);
+        }
+
+        var translateElementY = function(id1, id2, direction, array, index)
+        {
+            var element1 = $('#'+ id1);
+            var element2 = $('#'+ id2);
+            element1.css({"-webkit-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element2.css({"-webkit-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element1.css({"-moz-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element2.css({"-moz-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element1.css({"-o-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element2.css({"-o-transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element1.css({"transform":"translate(0vw, " + 100 * direction + "vh)"});
+            element2.css({"transform":"translate(0vw, " + 100 * direction + "vh)"});
+            setTimeout(function()
+            {
+                element1.addClass('noTransition');
+                element2.addClass('noTransition');
+                element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                element1.css({"-moz-transform":"translate(0vw, 0vh)"});
+                element2.css({"-moz-transform":"translate(0vw, 0vh)"});
+                element1.css({"-o-transform":"translate(0vw, 0vh)"});
+                element2.css({"-o-transform":"translate(0vw, 0vh)"});
+                element1.css({"transform":"translate(0vw, 0vh)"});
+                element2.css({"transform":"translate(0vw, 0vh)"});
+                element1[0].src = element2[0].src;
+                if (index < array.length)
+                    element2[0].src = array[index];
+                else
+                    element2[0].src = "nothingMore.html";
+                setTimeout(function() {
+                    element1.removeClass('noTransition');
+                    element2.removeClass('noTransition');
+                    bubbleIframeMouseMove(document.getElementById(id1));
+                    bubbleIframeMouseMove(document.getElementById(id2));
+                }, 100);
+            }, 1950);
+        }
+        bubbleIframeMouseMove(document.getElementById('homePage'));
+//        bubbleIframeMouseMove(document.getElementById('videoUp1'));
+////        bubbleIframeMouseMove($('#videoUp2')[0]);
+//        bubbleIframeMouseMove(document.getElementById('videoDown1'));
+////        bubbleIframeMouseMove($('#videoDown2')[0]);
+//        bubbleIframeMouseMove(document.getElementById('documents1'));
+////        bubbleIframeMouseMove($('#documents2')[0]);
+//        bubbleIframeMouseMove(document.getElementById('dataBase1'));
+////        bubbleIframeMouseMove($('#dataBase2')[0]);
+        document.getElementById("upArrow").onclick = function()
+        {
+            if (videoUp[videoUpIndex]) {
+                videoUpIndex++;
+                videoDownIndex = 0;
+                dataBaseIndex = 0;
+                documentsIndex = 0;
+                document.getElementById('videoDown1').src = videoDown[videoDownIndex];
+                document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
+                document.getElementById('documents1').src = documents[documentsIndex];
+                translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex);
+            }
+        }
+        document.getElementById("downArrow").onclick = function()
+        {
+            if (videoDown[videoDownIndex]) {
+                videoDownIndex++;
+                videoUpIndex = 0;
+                dataBaseIndex = 0;
+                documentsIndex = 0;
+                document.getElementById('videoUp1').src = videoUp[videoUpIndex];
+                document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
+                document.getElementById('documents1').src = documents[documentsIndex];
+                translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex);
+            }
+        }
+        document.getElementById("leftArrow").onclick = function()
+        {
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex) * 50, function(data){
+                if (data > 0) {
+                    dataBaseIndex++;
+                    videoUpIndex = 0;
+                    videoDownIndex = 0;
+                    documentsIndex = 0;
+                    document.getElementById('videoUp1').src = videoUp[videoUpIndex];
+                    document.getElementById('videoDown1').src = videoDown[videoDownIndex];
+                    document.getElementById('documents1').src = documents[documentsIndex];
+                    translateElementX('homePage', 'dataBase1', 1, dataBase, dataBaseIndex, true);
+                }
+            })
+
+        }
+        document.getElementById("rightArrow").onclick = function()
+        {
+            if (documents[documentsIndex]) {
+                documentsIndex++;
+                videoUpIndex = 0;
+                videoDownIndex = 0;
+                dataBaseIndex = 0;
+                document.getElementById('videoUp1').src = videoUp[videoUpIndex];
+                document.getElementById('videoDown1').src = videoDown[videoDownIndex];
+                document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
+                translateElementX('homePage', 'documents1', -1, documents, documentsIndex, true);
+            }
+
+        }
+    </script>
+</body>
+</html>

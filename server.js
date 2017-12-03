@@ -7,7 +7,7 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 
 var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0',
@@ -91,19 +91,64 @@ app.get('/addSample', function(req, res)
 												n23:{x:req.query.n23x, y:req.query.n23y, z:req.query.n23z},
 												n24:{x:req.query.n24x, y:req.query.n24y, z:req.query.n24z}
 		}});
-        col.find().sort({"date": -1}).limit(50).toArray().then(function (data)
-        {
-            var json = JSON.stringify(data);
-            fs.writeFile('public/bodyfail.json', json, 'utf8');
-            res.status(200).send('OK');
-        });
+        //col.find().sort({"date": -1}).limit(50).toArray().then(function (data)
+        //{
+        //    var json = JSON.stringify(data);
+        //    fs.writeFile('public/bodyfail.json', json, 'utf8');
+        //    res.status(200).send('OK');
+        //});
         //console.log(test);
 
 	}
 });
 
+app.get('/get_range_data_length', function (req, res) {
+    if (!db)
+    {
+        initDb(function(err){});
+    }
+    if (db) {
+        var col = db.collection('movements');
+        col.find().sort({"date": -1}).skip(req.query.range).limit(50).toArray().then(function (data) {
+            res.status(200).send(data.length);
+        });
+    }
+});
+
+app.get('/get_range_data', function (req, res) {
+    if (!db)
+    {
+        initDb(function(err){});
+    }
+    if (db) {
+        var col = db.collection('movements');
+        col.find().sort({"date": -1}).skip(req.query.range).limit(50).toArray().then(function (data) {
+            var json = JSON.stringify(data);
+            res.status(200).send(json);
+        });
+    }
+});
+
+app.get('/get_data', function (req, res) {
+    if (!db)
+    {
+        initDb(function(err){});
+    }
+    if (db) {
+        var col = db.collection('movements');
+        col.find().sort({"date": -1}).limit(50).toArray().then(function (data) {
+            var json = JSON.stringify(data);
+            res.status(200).send(json);
+        });
+    }
+});
+
 app.get('/', function (req, res) {
     res.render('index.html');
+});
+
+app.get('/homepage', function (req, res) {
+    res.render('homepage.html');
 });
 
 // error handling
