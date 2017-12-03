@@ -133,7 +133,7 @@
 		}
 		httpGetAsync("/get_data", function(data)
 		{
-			jsonDataBaseFile = data;
+			jsonDataBaseFile = $.parseJSON(data);
 			var loader = new THREE.FontLoader();
 			loader.load( 'fonts/Verdana_Regular.json', function ( font ) {
 				init(font);
@@ -157,7 +157,8 @@
 		};
 		var material = new THREE.MeshLambertMaterial( { color: 0x000000 } );
 		var wireframeMaterial = new THREE.MeshBasicMaterial( { color: 0x000000, opacity: 0.3, wireframe: false, transparent: true } );
-
+		var nbWidth = 8;
+		var nbHeight = 6;
 		function addTube(x, y, index, font) {
 			var jsonDataBase = jsonDataBaseFile[index];
 			/*var geometry = new THREE.TextGeometry( jsonDataBase.skeleton.n0.x + " " + jsonDataBase.skeleton.n0.y + " " + jsonDataBase.skeleton.n0.z, {
@@ -171,12 +172,12 @@
 			var text = document.createElement('div');
 			text.style.position = 'absolute';
 //text2.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
-			text.style.fontSize = "0.5%";
+			text.style.fontSize = "4.4px";
 			text.style.lineHeight = "90%";
-			text.style.width = "100%";
-			text.innerHTML =  "<pre>" + jsonDataBase.skeleton.n0.x + " " + jsonDataBase.skeleton.n0.y + " " + jsonDataBase.skeleton.n0.z + "\n" + jsonDataBase.skeleton.n1.x + " " + jsonDataBase.skeleton.n1.y + " " + jsonDataBase.skeleton.n1.z + "\n" + jsonDataBase.skeleton.n2.x + " " + jsonDataBase.skeleton.n2.y + " " + jsonDataBase.skeleton.n2.z + "\n" + jsonDataBase.skeleton.n3.x + " " + jsonDataBase.skeleton.n3.y + " " + jsonDataBase.skeleton.n3.z + "\n" + jsonDataBase.skeleton.n4.x + " " + jsonDataBase.skeleton.n4.y + " " + jsonDataBase.skeleton.n4.z + "\n" + jsonDataBase.skeleton.n5.x + " " + jsonDataBase.skeleton.n5.y + " " + jsonDataBase.skeleton.n5.z + "\n" + jsonDataBase.skeleton.n6.x + " " + jsonDataBase.skeleton.n6.y + " " + jsonDataBase.skeleton.n6.z + "\n" + jsonDataBase.skeleton.n7.x + " " + jsonDataBase.skeleton.n7.y + " " + jsonDataBase.skeleton.n7.z + "\n" + jsonDataBase.skeleton.n8.x + " " + jsonDataBase.skeleton.n8.y + " " + jsonDataBase.skeleton.n8.z + "\n" + jsonDataBase.skeleton.n9.x + " " + jsonDataBase.skeleton.n9.y + " " + jsonDataBase.skeleton.n9.z + "\n" + jsonDataBase.skeleton.n10.x + " " + jsonDataBase.skeleton.n10.y + " " + jsonDataBase.skeleton.n10.z + "\n" + jsonDataBase.skeleton.n11.x + " " + jsonDataBase.skeleton.n11.y + " " + jsonDataBase.skeleton.n11.z + "\n" + jsonDataBase.skeleton.n12.x + " " + jsonDataBase.skeleton.n12.y + " " + jsonDataBase.skeleton.n12.z + "\n" + jsonDataBase.skeleton.n13.x + " " + jsonDataBase.skeleton.n13.y + " " + jsonDataBase.skeleton.n13.z + "\n" + jsonDataBase.skeleton.n14.x + " " + jsonDataBase.skeleton.n14.y + " " + jsonDataBase.skeleton.n14.z + "\n" + jsonDataBase.skeleton.n15.x + " " + jsonDataBase.skeleton.n15.y + " " + jsonDataBase.skeleton.n15.z + "\n" + jsonDataBase.skeleton.n16.x + " " + jsonDataBase.skeleton.n16.y + " " + jsonDataBase.skeleton.n16.z + "\n" + jsonDataBase.skeleton.n17.x + " " + jsonDataBase.skeleton.n17.y + " " + jsonDataBase.skeleton.n17.z + "\n" + jsonDataBase.skeleton.n18.x + " " + jsonDataBase.skeleton.n18.y + " " + jsonDataBase.skeleton.n18.z + "\n" + jsonDataBase.skeleton.n19.x + " " + jsonDataBase.skeleton.n19.y + " " + jsonDataBase.skeleton.n19.z + "\n" + jsonDataBase.skeleton.n20.x + " " + jsonDataBase.skeleton.n20.y + " " + jsonDataBase.skeleton.n20.z + "\n" + jsonDataBase.skeleton.n21.x + " " + jsonDataBase.skeleton.n21.y + " " + jsonDataBase.skeleton.n21.z + "\n" + jsonDataBase.skeleton.n22.x + " " + jsonDataBase.skeleton.n22.y + " " + jsonDataBase.skeleton.n22.z + "\n" + jsonDataBase.skeleton.n23.x + " " + jsonDataBase.skeleton.n23.y + " " + jsonDataBase.skeleton.n23.z + "\n" + jsonDataBase.skeleton.n24.x + " " + jsonDataBase.skeleton.n24.y + " " + jsonDataBase.skeleton.n24.z + "</pre>";
-			text.style.top = (y * 20 - 20) + '%';
-			text.style.left =  (x * 10 - 10) + '%';
+			text.style.width = $(window).width() / (nbWidth * 2) + "px";
+			text.innerHTML =  "<pre>" + jsonDataBase._id + "\n" + jsonDataBase.date + "\n" + jsonDataBase.place + "\n" + jsonDataBase.skeleton.n0.x + " " + jsonDataBase.skeleton.n0.y + " " + jsonDataBase.skeleton.n0.z + "\n" + jsonDataBase.skeleton.n1.x + " " + jsonDataBase.skeleton.n1.y + " " + jsonDataBase.skeleton.n1.z + "\n" + jsonDataBase.skeleton.n2.x + " " + jsonDataBase.skeleton.n2.y + " " + jsonDataBase.skeleton.n2.z + "\n" + jsonDataBase.skeleton.n3.x + " " + jsonDataBase.skeleton.n3.y + " " + jsonDataBase.skeleton.n3.z + "\n" + jsonDataBase.skeleton.n4.x + " " + jsonDataBase.skeleton.n4.y + " " + jsonDataBase.skeleton.n4.z + "\n" + jsonDataBase.skeleton.n5.x + " " + jsonDataBase.skeleton.n5.y + " " + jsonDataBase.skeleton.n5.z + "\n" + jsonDataBase.skeleton.n6.x + " " + jsonDataBase.skeleton.n6.y + " " + jsonDataBase.skeleton.n6.z + "\n" + jsonDataBase.skeleton.n7.x + " " + jsonDataBase.skeleton.n7.y + " " + jsonDataBase.skeleton.n7.z + "\n" + jsonDataBase.skeleton.n8.x + " " + jsonDataBase.skeleton.n8.y + " " + jsonDataBase.skeleton.n8.z + "\n" + jsonDataBase.skeleton.n9.x + " " + jsonDataBase.skeleton.n9.y + " " + jsonDataBase.skeleton.n9.z + "\n" + jsonDataBase.skeleton.n10.x + " " + jsonDataBase.skeleton.n10.y + " " + jsonDataBase.skeleton.n10.z + "\n" + jsonDataBase.skeleton.n11.x + " " + jsonDataBase.skeleton.n11.y + " " + jsonDataBase.skeleton.n11.z + "\n" + jsonDataBase.skeleton.n12.x + " " + jsonDataBase.skeleton.n12.y + " " + jsonDataBase.skeleton.n12.z + "\n" + jsonDataBase.skeleton.n13.x + " " + jsonDataBase.skeleton.n13.y + " " + jsonDataBase.skeleton.n13.z + "\n" + jsonDataBase.skeleton.n14.x + " " + jsonDataBase.skeleton.n14.y + " " + jsonDataBase.skeleton.n14.z + "\n" + jsonDataBase.skeleton.n15.x + " " + jsonDataBase.skeleton.n15.y + " " + jsonDataBase.skeleton.n15.z + "\n" + jsonDataBase.skeleton.n16.x + " " + jsonDataBase.skeleton.n16.y + " " + jsonDataBase.skeleton.n16.z + "\n" + jsonDataBase.skeleton.n17.x + " " + jsonDataBase.skeleton.n17.y + " " + jsonDataBase.skeleton.n17.z + "\n" + jsonDataBase.skeleton.n18.x + " " + jsonDataBase.skeleton.n18.y + " " + jsonDataBase.skeleton.n18.z + "\n" + jsonDataBase.skeleton.n19.x + " " + jsonDataBase.skeleton.n19.y + " " + jsonDataBase.skeleton.n19.z + "\n" + jsonDataBase.skeleton.n20.x + " " + jsonDataBase.skeleton.n20.y + " " + jsonDataBase.skeleton.n20.z + "\n" + jsonDataBase.skeleton.n21.x + " " + jsonDataBase.skeleton.n21.y + " " + jsonDataBase.skeleton.n21.z + "\n" + jsonDataBase.skeleton.n22.x + " " + jsonDataBase.skeleton.n22.y + " " + jsonDataBase.skeleton.n22.z + "\n" + jsonDataBase.skeleton.n23.x + " " + jsonDataBase.skeleton.n23.y + " " + jsonDataBase.skeleton.n23.z + "\n" + jsonDataBase.skeleton.n24.x + " " + jsonDataBase.skeleton.n24.y + " " + jsonDataBase.skeleton.n24.z + "</pre>";
+			text.style.top = (y - 1) * ($(window).height() / nbHeight) + "px";
+			text.style.left =  ((x - 1) * ($(window).width() / nbWidth))  + "px";
 			document.body.appendChild(text);
 			var extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n0.x) * 30, parseFloat(jsonDataBase.skeleton.n0.y) * 30, parseFloat(jsonDataBase.skeleton.n0.z) * 10),
@@ -187,7 +188,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -198,8 +199,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
@@ -210,8 +210,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -219,8 +218,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -228,8 +226,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -237,8 +234,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
@@ -246,40 +242,35 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * 100, y * (90), 0);
-
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			setScale();
 		}
@@ -310,9 +301,9 @@
 //			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
 //			parent.add( splineCamera );
 			var index = 0;
-			for (var i = 1; i <= 10 && index < jsonDataBaseFile.length; i++)
+			for (var i = 1; i <= (nbWidth) && index < jsonDataBaseFile.length; i++)
 			{
-				for (var j = 1; j <= 5 && index < jsonDataBaseFile.length; j++)
+				for (var j = 1; j <= (nbHeight) && index < jsonDataBaseFile.length; j++)
 				{
 					addTube(i, j, index, font);
 					index++;

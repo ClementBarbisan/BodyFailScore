@@ -79,13 +79,13 @@
     }
     #homePage
     {
-        background: #00d4b4;
+        /*background: #00d4b4;*/
         left: 100%;
         top: 100%;
     }
     #videoUp1
     {
-        background: #2F6FAD;
+        /*background: #2F6FAD;*/
         left:100%;
         top:0%;
     }
@@ -97,7 +97,7 @@
     /*}*/
     #videoDown1
     {
-        background: #b94a48;
+        /*background: #b94a48;*/
         left: 100%;
         top: 200%;
     }
@@ -109,7 +109,7 @@
     /*}*/
     #documents1
     {
-        background: aqua;
+       /*background: aqua;*/
         left: 200%;
         top: 100%;
     }
@@ -121,7 +121,7 @@
     /*}*/
     #dataBase1
     {
-        background: chartreuse;
+        /*background: chartreuse;*/
         left: 0%;
         top: 100%;
     }
@@ -153,17 +153,17 @@
     </iframe>
     <!--<iframe id="videoUp2">-->
     <!--</iframe>-->
-    <iframe id="videoDown1">
+    <iframe id="videoDown1" src="videoDown1.html">
     </iframe>
     <!--<iframe id="videoDown2">-->
     <!--</iframe>-->
-    <iframe id="documents1">
+    <iframe id="documents1" src="documents1.html">
     </iframe>
     <!--<iframe id="documents2">-->
     <!--</iframe>-->
     <iframe id="homePage" src="homePage.html">
     </iframe>
-    <iframe id="dataBase1">
+    <iframe id="dataBase1" src="dataBase1.html">
     </iframe>
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
@@ -194,7 +194,7 @@
         var documents = ["documents1.html","documents2.html"];
         var documentsIndex = 0;
         $(window).on('mousemove', function () {
-            console.log("test");
+            //console.log("test");
             $('.arrow').addClass('show');
             try {
                 clearTimeout(timer);
@@ -325,6 +325,7 @@
                 videoDownIndex = 0;
                 dataBaseIndex = 0;
                 documentsIndex = 0;
+                localStorage.setItem("range1", 0);
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
@@ -338,6 +339,7 @@
                 videoUpIndex = 0;
                 dataBaseIndex = 0;
                 documentsIndex = 0;
+                localStorage.setItem("range1", 0);
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
@@ -346,8 +348,10 @@
         }
         document.getElementById("leftArrow").onclick = function()
         {
-            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex) * 50, function(data){
-                if (data > 0) {
+            console.log("test");
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 50), function(data){
+                console.log(data);
+                if (parseInt(data) > 0) {
                     dataBaseIndex++;
                     videoUpIndex = 0;
                     videoDownIndex = 0;
@@ -355,6 +359,10 @@
                     document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                     document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                     document.getElementById('documents1').src = documents[documentsIndex];
+                    if (dataBaseIndex % 2 == 0)
+                        localStorage.setItem("range1", dataBaseIndex * 50);
+                    else
+                        localStorage.setItem("range2", dataBaseIndex * 50);
                     translateElementX('homePage', 'dataBase1', 1, dataBase, dataBaseIndex, true);
                 }
             })
@@ -367,12 +375,12 @@
                 videoUpIndex = 0;
                 videoDownIndex = 0;
                 dataBaseIndex = 0;
+                localStorage.setItem("range1", 0);
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 translateElementX('homePage', 'documents1', -1, documents, documentsIndex, true);
             }
-
         }
     </script>
 </body>

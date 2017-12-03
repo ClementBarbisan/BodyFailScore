@@ -65,7 +65,7 @@ app.get('/addSample', function(req, res)
 	if (db)
 	{
 		var col = db.collection('movements');
-		col.insert({date: Date.now(), skeleton: {n0:{x:req.query.n0x, y:req.query.n0y, z:req.query.n0z},
+		col.insert({date: Date.now(),place: req.query.place, skeleton: {n0:{x:req.query.n0x, y:req.query.n0y, z:req.query.n0z},
 												n1:{x:req.query.n1x, y:req.query.n1y, z:req.query.n1z},
 												n2:{x:req.query.n2x, y:req.query.n2y, z:req.query.n2z},
 												n3:{x:req.query.n3x, y:req.query.n3y, z:req.query.n3z},
@@ -95,7 +95,7 @@ app.get('/addSample', function(req, res)
         //{
         //    var json = JSON.stringify(data);
         //    fs.writeFile('public/bodyfail.json', json, 'utf8');
-        //    res.status(200).send('OK');
+            res.status(200).send('OK');
         //});
         //console.log(test);
 
@@ -109,9 +109,9 @@ app.get('/get_range_data_length', function (req, res) {
     }
     if (db) {
         var col = db.collection('movements');
-        col.find().sort({"date": -1}).skip(req.query.range).limit(50).toArray().then(function (data) {
-            res.status(200).send(data.length);
-        });
+            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(50).toArray().then(function (data) {
+                res.status(200).send(data.length.toString());
+            });
     }
 });
 
@@ -122,10 +122,11 @@ app.get('/get_range_data', function (req, res) {
     }
     if (db) {
         var col = db.collection('movements');
-        col.find().sort({"date": -1}).skip(req.query.range).limit(50).toArray().then(function (data) {
-            var json = JSON.stringify(data);
-            res.status(200).send(json);
-        });
+
+            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(50).toArray().then(function (data) {
+                var json = JSON.stringify(data);
+                res.status(200).send(json);
+            });
     }
 });
 
