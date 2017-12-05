@@ -30,53 +30,31 @@
 				margin-left:-100%;
 				padding:0 5px;
 				text-align:left;
-				height:10px;
+				height:27px;
+				font-size: 24px;
 				white-space:nowrap;
-				overflow: hidden;
-			}
-
-			.defile:hover {
-				display: inline;
-				-webkit-animation:linear marqueelike 30s infinite ;
-				-moz-animation:linear marqueelike 30s infinite ;
-				-o-animation:linear marqueelike 30s infinite ;
-				-ms-animation:linear marqueelike 30s infinite ;
-				animation:linear marqueelike 30s infinite ;
-				margin-left:-100%;
-				padding:0 5px;
-				text-align:left;
-				height:17px;
-				white-space:nowrap;
-				overflow: hidden;
-			}
-
-			.defile:after {
-				content:attr(data-text);
-				position:absolute;
-				white-space:nowrap;
-				padding-left:10px;
 				overflow: hidden;
 			}
 
 			@-webkit-keyframes marqueelike {
-				0%, 100% {margin-left:0;}
-				99.99% {margin-left:-100%;}
+				0%, 100% {margin-left:100%;}
+				99.99% {margin-left:-200%;}
 			}
 			@-moz-keyframes marqueelike {
-				0%, 100% {margin-left:0;}
-				99.99% {margin-left:-100%;}
+				0%, 100% {margin-left:100%;}
+				99.99% {margin-left:-200%;}
 			}
 			@-o-keyframes marqueelike {
-				0%, 100% {margin-left:0;}
-				99.99% {margin-left:-100%;}
+				0%, 100% {margin-left:100%;}
+				99.99% {margin-left:-200%;}
 			}
 			@-ms-keyframes marqueelike {
-				0%, 100% {margin-left:0;}
-				99.99% {margin-left:-100%;}
+				0%, 100% {margin-left:100%;}
+				99.99% {margin-left:-200%;}
 			}
 			@keyframes marqueelike {
-				0%, 100% {margin-left:0;}
-				99.99% {margin-left:-100%;}
+				0%, 100% {margin-left:100%;}
+				99.99% {margin-left:-200%;}
 			}
 
 			@media only screen and (max-width: 860px) {
@@ -91,21 +69,8 @@
 					margin-left:-100%;
 					padding:0 5px;
 					text-align:left;
-					height:17px;
-					white-space:nowrap;
-					overflow: hidden;
-				}
-				.defile:hover {
-					display: inline;
-					-webkit-animation:linear marqueelike 25s infinite ;
-					-moz-animation:linear marqueelike 25s infinite ;
-					-o-animation:linear marqueelike 25s infinite ;
-					-ms-animation:linear marqueelike 25s infinite ;
-					animation:linear marqueelike 25s infinite ;
-					margin-left:-100%;
-					padding:0 5px;
-					text-align:left;
-					height:17px;
+					height:27px;
+					font-size: 24px;
 					white-space:nowrap;
 					overflow: hidden;
 				}
@@ -137,7 +102,6 @@
 		}
 		httpGetAsync("/get_range_data?range=" + rangeData, function(data)
 		{
-			console.log("rrange1 = " + rangeData);
 			jsonDataBaseFile = $.parseJSON(data);
 			var loader = new THREE.FontLoader();
 			loader.load( 'fonts/Verdana_Regular.json', function ( font ) {
@@ -194,7 +158,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -205,7 +169,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
@@ -216,7 +180,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -224,7 +188,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -232,7 +196,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -240,7 +204,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
@@ -248,35 +212,35 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			setScale();
 		}
@@ -362,7 +326,7 @@
 	</body>
 
 	<div style="border:2px solid black; background-color: white;position: fixed; bottom: 0;">
-		<span class="defile" data-text="PARTITION D'ERREURS 	La partition d'erreurs est la collecte, l'affichage et le partage des gestuelles par l'intermédiaire d'une plateforme internet de diffusion sur un mode viral. Notice de gestes de contournement du système. Le Final sera une lecture, interprétation et interpolation par des performeurs de la partition de mouvements collectés.">PARTITION D'ERREURS 	La partition d'erreurs est la collecte, l'affichage et le partage des gestuelles par l'intermédiaire d'une plateforme internet de diffusion sur un mode viral. Notice de gestes de contournement du système. Le Final sera une lecture, interprétation et interpolation par des performeurs de la partition de mouvements collectés.</span>
+		<span class="defile">PARTITION D'ERREURS 	La partition d'erreurs est la collecte, l'affichage et le partage des gestuelles par l'intermédiaire d'une plateforme internet de diffusion sur un mode viral. Notice de gestes de contournement du système. Le Final sera une lecture, interprétation et interpolation par des performeurs de la partition de mouvements collectés.</span>
 	</div>
 
 </html>

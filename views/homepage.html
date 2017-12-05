@@ -39,6 +39,11 @@
     {
 
     }
+    #imgCross
+    {
+        vertical-align: top;
+        width: 100%; /* max width */
+    }
     #downArrow img
     {
         vertical-align: top;
@@ -179,6 +184,9 @@
     <div id="rightArrow" class="arrow" style="position: fixed; top: 50vh; right:0;transform: translate(25%, -50%);">
         <img src="arrow.png">
     </div>
+    <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 27px; height: 27px;">
+        <img id="imgCross" src="cross_white.jpg">
+    </div>
     <script>
         window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
         window.addEventListener('resize', function() {
@@ -193,8 +201,11 @@
         var dataBaseIndex = 0;
         var documents = ["documents1.html","documents2.html"];
         var documentsIndex = 0;
+        var currentSource = "home.html";
         $(window).on('mousemove', function () {
             //console.log("test");
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
             $('.arrow').addClass('show');
             try {
                 clearTimeout(timer);
@@ -242,36 +253,38 @@
             setTimeout(function()
             {
                 element1.css({'visibility': 'hidden'});
-                element1.addClass('noTransition');
-                element2.addClass('noTransition');
-                element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
-                element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
-                element1.css({"-moz-transform":"translate(0vw, 0vh)"});
-                element2.css({"-moz-transform":"translate(0vw, 0vh)"});
-                element1.css({"-o-transform":"translate(0vw, 0vh)"});
-                element2.css({"-o-transform":"translate(0vw, 0vh)"});
-                element1.css({"transform":"translate(0vw, 0vh)"});
-                element2.css({"transform":"translate(0vw, 0vh)"});
-                element1[0].src = element2[0].src;
-                if (isDataBase)
-                {
-                    element2[0].src = array[index % 2];
-                }
-                else
-                {
-                    if (array[index])
-                        element2[0].src = array[index];
+                setTimeout(function(){
+                    element1.addClass('noTransition');
+                    element2.addClass('noTransition');
+                    element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                    element1.css({"-moz-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-moz-transform":"translate(0vw, 0vh)"});
+                    element1.css({"-o-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-o-transform":"translate(0vw, 0vh)"});
+                    element1.css({"transform":"translate(0vw, 0vh)"});
+                    element2.css({"transform":"translate(0vw, 0vh)"});
+                    element1[0].src = element2[0].src;
+                    if (isDataBase)
+                    {
+                        element2[0].src = array[index % 2];
+                    }
                     else
-                        element2[0].src = "nothingMore.html";
-                }
-                bubbleIframeMouseMove(document.getElementById('homePage'));
-                setTimeout(function() {
-                    element1.css({'visibility': 'visible'});
-                    setTimeout(function(){
-                        element1.removeClass('noTransition');
-                        element2.removeClass('noTransition');
-                        bubbleIframeMouseMove(document.getElementById('homePage'));
-                    }, 200);
+                    {
+                        if (array[index])
+                            element2[0].src = array[index];
+                        else
+                            element2[0].src = "nothingMore.html";
+                    }
+                    bubbleIframeMouseMove(document.getElementById('homePage'));
+                    setTimeout(function() {
+                        element1.css({'visibility': 'visible'});
+                        setTimeout(function(){
+                            element1.removeClass('noTransition');
+                            element2.removeClass('noTransition');
+                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                        }, 200);
+                    }, 50);
                 }, 50);
             }, 1950);
         }
@@ -291,28 +304,30 @@
             setTimeout(function()
             {
                 element1.css({'visibility': 'hidden'});
-                element1.addClass('noTransition');
-                element2.addClass('noTransition');
-                element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
-                element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
-                element1.css({"-moz-transform":"translate(0vw, 0vh)"});
-                element2.css({"-moz-transform":"translate(0vw, 0vh)"});
-                element1.css({"-o-transform":"translate(0vw, 0vh)"});
-                element2.css({"-o-transform":"translate(0vw, 0vh)"});
-                element1.css({"transform":"translate(0vw, 0vh)"});
-                element2.css({"transform":"translate(0vw, 0vh)"});
-                element1[0].src = element2[0].src;
-                if (index < array.length)
-                    element2[0].src = array[index];
-                else
-                    element2[0].src = "nothingMore.html";
-                setTimeout(function() {
-                    element1.css({'visibility': 'visible'});
-                    setTimeout(function(){
-                        element1.removeClass('noTransition');
-                        element2.removeClass('noTransition');
-                        bubbleIframeMouseMove(document.getElementById('homePage'));
-                    }, 200);
+                setTimeout(function(){
+                    element1.addClass('noTransition');
+                    element2.addClass('noTransition');
+                    element1.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-webkit-transform":"translate(0vw, 0vh)"});
+                    element1.css({"-moz-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-moz-transform":"translate(0vw, 0vh)"});
+                    element1.css({"-o-transform":"translate(0vw, 0vh)"});
+                    element2.css({"-o-transform":"translate(0vw, 0vh)"});
+                    element1.css({"transform":"translate(0vw, 0vh)"});
+                    element2.css({"transform":"translate(0vw, 0vh)"});
+                    element1[0].src = element2[0].src;
+                    if (index < array.length)
+                        element2[0].src = array[index];
+                    else
+                        element2[0].src = "nothingMore.html";
+                    setTimeout(function() {
+                        element1.css({'visibility': 'visible'});
+                        setTimeout(function(){
+                            element1.removeClass('noTransition');
+                            element2.removeClass('noTransition');
+                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                        }, 200);
+                    }, 50);
                 }, 50);
             }, 1950);
         }
@@ -325,8 +340,27 @@
 ////        bubbleIframeMouseMove($('#documents2')[0]);
 //        bubbleIframeMouseMove(document.getElementById('dataBase1'));
 ////        bubbleIframeMouseMove($('#dataBase2')[0]);
-        document.getElementById("upArrow").onclick = function()
+        document.getElementById("cross").onmouseup = function()
         {
+            var img = document.getElementById("imgCross");
+            if(img.getAttribute('src') === "cross_white.jpg")
+            {
+                var iframe = document.getElementById("homePage");
+                currentSource = iframe.src;
+                img.src = "cross_black.jpg";
+                iframe.src = "details.html";
+            }
+            else
+            {
+                var iframe = document.getElementById("homePage");
+                img.src = "cross_white.jpg";
+                iframe.src = currentSource;
+            }
+        }
+        document.getElementById("upArrow").onmouseup = function()
+        {
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
             if (videoUp[videoUpIndex]) {
                 videoUpIndex++;
                 videoDownIndex = 0;
@@ -339,8 +373,10 @@
                 translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex);
             }
         }
-        document.getElementById("downArrow").onclick = function()
+        document.getElementById("downArrow").onmouseup = function()
         {
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
             if (videoDown[videoDownIndex]) {
                 videoDownIndex++;
                 videoUpIndex = 0;
@@ -353,10 +389,11 @@
                 translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex);
             }
         }
-        document.getElementById("leftArrow").onclick = function()
+        document.getElementById("leftArrow").onmouseup = function()
         {
-            console.log("test");
-            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 50), function(data){
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
                 console.log(data);
                 if (parseInt(data) > 0) {
                     dataBaseIndex++;
@@ -367,16 +404,18 @@
                     document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                     document.getElementById('documents1').src = documents[documentsIndex];
                     if (dataBaseIndex % 2 == 0)
-                        localStorage.setItem("range1", dataBaseIndex * 50);
+                        localStorage.setItem("range1", dataBaseIndex * 48);
                     else
-                        localStorage.setItem("range2", dataBaseIndex * 50);
+                        localStorage.setItem("range2", dataBaseIndex * 48);
                     translateElementX('homePage', 'dataBase1', 1, dataBase, dataBaseIndex, true);
                 }
             })
 
         }
-        document.getElementById("rightArrow").onclick = function()
+        document.getElementById("rightArrow").onmouseup = function()
         {
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
             if (documents[documentsIndex]) {
                 documentsIndex++;
                 videoUpIndex = 0;

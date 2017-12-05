@@ -110,7 +110,7 @@ app.get('/get_range_data_length', function (req, res) {
     }
     if (db) {
         var col = db.collection('movements');
-            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(50).toArray().then(function (data) {
+            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(48).toArray().then(function (data) {
                 res.status(200).send(data.length.toString());
             });
     }
@@ -124,7 +124,7 @@ app.get('/get_range_data', function (req, res) {
     if (db) {
         var col = db.collection('movements');
 
-            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(50).toArray().then(function (data) {
+            col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(48).toArray().then(function (data) {
                 var json = JSON.stringify(data);
                 res.status(200).send(json);
             });
@@ -138,7 +138,7 @@ app.get('/get_data', function (req, res) {
     }
     if (db) {
         var col = db.collection('movements');
-        col.find().sort({"date": -1}).limit(50).toArray().then(function (data) {
+        col.find().sort({"date": -1}).limit(48).toArray().then(function (data) {
             var json = JSON.stringify(data);
             res.status(200).send(json);
         });

@@ -31,22 +31,8 @@
 				margin-left:-100%;
 				padding:0 5px;
 				text-align:left;
-				height:10px;
-				white-space:nowrap;
-				overflow: hidden;
-			}
-
-			.defile:hover {
-				display: inline;
-				-webkit-animation:linear marqueelike 30s infinite ;
-				-moz-animation:linear marqueelike 30s infinite ;
-				-o-animation:linear marqueelike 30s infinite ;
-				-ms-animation:linear marqueelike 30s infinite ;
-				animation:linear marqueelike 30s infinite ;
-				margin-left:-100%;
-				padding:0 5px;
-				text-align:left;
-				height:17px;
+				height:25px;
+				font-size: 24px;
 				white-space:nowrap;
 				overflow: hidden;
 			}
@@ -92,16 +78,10 @@
 					margin-left:-100%;
 					padding:0 5px;
 					text-align:left;
-					height:17px;
+					height:25px;
+					font-size: 24px;
 					white-space:nowrap;
 					overflow: hidden;
-				}
-				.defile:hover {
-					-webkit-animation:linear marqueelike 25s infinite ;
-					-moz-animation:linear marqueelike 25s infinite ;
-					-o-animation:linear marqueelike 25s infinite ;
-					-ms-animation:linear marqueelike 25s infinite ;
-					animation:linear marqueelike 25s infinite ;
 				}
 			}
 		</style>
@@ -181,7 +161,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -192,7 +172,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
@@ -203,7 +183,7 @@
 
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n8.x) * 30, parseFloat(jsonDataBase.skeleton.n8.y) * 30, parseFloat(jsonDataBase.skeleton.n8.z) * 10),
@@ -211,7 +191,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n4.x) * 30, parseFloat(jsonDataBase.skeleton.n4.y) * 30, parseFloat(jsonDataBase.skeleton.n4.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -219,7 +199,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n16.x) * 30, parseFloat(jsonDataBase.skeleton.n16.y) * 30, parseFloat(jsonDataBase.skeleton.n16.z) * 10),
@@ -227,7 +207,7 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 30, parseFloat(jsonDataBase.skeleton.n12.y) * 30, parseFloat(jsonDataBase.skeleton.n12.z) * 10),
@@ -235,35 +215,35 @@
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n10.x) * 30, parseFloat(jsonDataBase.skeleton.n10.y) * 30, parseFloat(jsonDataBase.skeleton.n10.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n24.x) * 30, parseFloat(jsonDataBase.skeleton.n24.y) * 30, parseFloat(jsonDataBase.skeleton.n24.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n6.x) * 30, parseFloat(jsonDataBase.skeleton.n6.y) * 30, parseFloat(jsonDataBase.skeleton.n6.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n22.x) * 30, parseFloat(jsonDataBase.skeleton.n22.y) * 30, parseFloat(jsonDataBase.skeleton.n22.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n18.x) * 30, parseFloat(jsonDataBase.skeleton.n18.y) * 30, parseFloat(jsonDataBase.skeleton.n18.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n19.x) * 30, parseFloat(jsonDataBase.skeleton.n19.y) * 30, parseFloat(jsonDataBase.skeleton.n19.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			extrudePath = new THREE.CatmullRomCurve3([
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n14.x) * 30, parseFloat(jsonDataBase.skeleton.n14.y) * 30, parseFloat(jsonDataBase.skeleton.n14.z) * 10),
 				new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 30, parseFloat(jsonDataBase.skeleton.n15.y) * 30, parseFloat(jsonDataBase.skeleton.n15.z) * 10),
 			]);
 			tubeGeometry = new THREE.TubeBufferGeometry( extrudePath, params.extrusionSegments, 0.5, params.radiusSegments, params.closed );
-			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (y - 1) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+			tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 			addGeometry( tubeGeometry );
 			setScale();
 		}
