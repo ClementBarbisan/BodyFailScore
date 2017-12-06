@@ -6,6 +6,10 @@
     {
         overflow: hidden;
     }
+    @font-face {
+        font-family: myFont;
+        src: url('/fonts/MarfaFontlinealregular-663wt_regularTwo.otf');
+    }
     iframe
     {
         position: absolute;
@@ -30,24 +34,13 @@
     #upArrow
     {
     }
-    #upArrow img
+    #imgCross
     {
         vertical-align: top;
         width: 100%; /* max width */
     }
     #downArrow
     {
-
-    }
-    #imgCross
-    {
-        vertical-align: top;
-        width: 100%; /* max width */
-    }
-    #downArrow img
-    {
-        vertical-align: top;
-        width: 100%; /* max width */
         -webkit-transform: rotate(180deg);
         -moz-transform: rotate(180deg);
         -o-transform: rotate(180deg);
@@ -56,12 +49,6 @@
     }
     #rightArrow
     {
-
-    }
-    #rightArrow img
-    {
-        vertical-align: top;
-        width: 100%; /* max width */
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -o-transform: rotate(90deg);
@@ -70,12 +57,6 @@
     }
     #leftArrow
     {
-
-    }
-    #leftArrow img
-    {
-        vertical-align: top;
-        width: 100%; /* max width */
         -webkit-transform: rotate(270deg);
         -moz-transform: rotate(270deg);
         -o-transform: rotate(270deg);
@@ -136,10 +117,12 @@
         /*left: 0%;*/
         /*top: 150%;*/
     /*}*/
-    .arrow {
+    .arrowImg{
         visibility: hidden;
         opacity: 0;
         transition: all .5s ease;
+    }
+    .arrow {
         width: 5%;
     }
 
@@ -154,35 +137,43 @@
     <title></title>
 </head>
 <body>
-    <iframe id="videoUp1" src="videoUp1.html">
+    <iframe id="videoUp1" src="https://player.vimeo.com/video/245880050">
     </iframe>
     <!--<iframe id="videoUp2">-->
     <!--</iframe>-->
-    <iframe id="videoDown1" src="videoDown1.html">
+    <iframe id="videoDown1" src="https://player.vimeo.com/video/245880845">
     </iframe>
     <!--<iframe id="videoDown2">-->
     <!--</iframe>-->
-    <iframe id="documents1" src="documents1.html">
+    <iframe id="documents1" src="https://player.vimeo.com/video/245880687">
     </iframe>
     <!--<iframe id="documents2">-->
     <!--</iframe>-->
-    <iframe id="homePage" src="home.html">
+    <iframe style="width: 100vw; height: 100vh" id="homePage" src="home.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
     </iframe>
     <iframe id="dataBase1" src="dataBase1.html">
     </iframe>
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
-    <div id="upArrow" class="arrow" style="position:fixed; top:0;left:50vw;transform: translate(-50%, 0);">
-        <img src="arrow.png">
+    <div class="arrow" style="position:fixed; top:0;left:50vw;transform: translate(-50%, 0);">
+        <div class="arrowImg" id="upArrow" style="font-size: 24px; height: 27px; font-family: myFont">Diffordance
+            <img style="width: 100%" src="arrow.png">
+        </div>
     </div>
-    <div id="downArrow" class="arrow" style="position:fixed; bottom:0; left:50vw; transform: translate(-50%, 0);">
-        <img src="arrow.png">
+    <div class="arrow" style="position:fixed; bottom:0; left:50vw; transform: translate(-50%, 0);">
+        <div class="arrowImg" id="downArrow" style="font-size: 24px; height: 27px; font-family: myFont">Diffordance
+            <img style="width: 100%" src="arrow.png">
+        </div>
     </div>
-    <div id="leftArrow" class="arrow" style="position:fixed; top:50vh; left:0;transform: translate(-25%, -50%);">
-        <img src="arrow.png">
+    <div class="arrow" style="position:fixed; top:50vh; left:0;transform: translate(-25%, -50%);">
+        <div class="arrowImg" id="leftArrow" style="font-size: 24px; height: 27px; font-family: myFont">Database
+            <img style="width: 100%" src="arrow.png">
+        </div>
     </div>
-    <div id="rightArrow" class="arrow" style="position: fixed; top: 50vh; right:0;transform: translate(25%, -50%);">
-        <img src="arrow.png">
+    <div class="arrow" style="position: fixed; top: 50vh; right:0;transform: translate(25%, -50%);">
+        <div class="arrowImg" id="rightArrow" style="font-size: 24px; height: 27px; font-family: myFont">Documents
+            <img style="width: 100%" src="arrow.png">
+        </div>
     </div>
     <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 27px; height: 27px;">
         <img id="imgCross" src="cross_white.jpg">
@@ -193,27 +184,49 @@
             window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
         });
         var timer;
-        var videoUp = ["videoUp1.html","videoUp2.html"];
+        var videoUp = ["https://player.vimeo.com/video/245880050"];
         var videoUpIndex = 0;
-        var videoDown = ["videoDown1.html","videoDown2.html"];
+        var videoDown = ["https://player.vimeo.com/video/245880845"];
         var videoDownIndex = 0;
         var dataBase = ["dataBase1.html", "dataBase2.html"];
         var dataBaseIndex = 0;
-        var documents = ["documents1.html","documents2.html"];
+        var documents = ["https://player.vimeo.com/video/245880687","documents1.html","documents2.html","documents3.html","documents4.html","documents5.html","documents6.html"];
         var documentsIndex = 0;
         var currentSource = "home.html";
-        $(window).on('mousemove', function () {
+        var currentIsVideo = false;
+        var onMouseMove = function () {
             //console.log("test");
-            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
-                return;
-            $('.arrow').addClass('show');
+
+            if (videoUpIndex < videoUp.length)
+                $('#upArrow').addClass('show');
+            else
+                $('#upArrow').removeClass('show');
+            if (videoDownIndex < videoDown.length)
+                $('#downArrow').addClass('show');
+            else
+                $('#downArrow').removeClass('show');
+            if (documentsIndex < documents.length)
+                $('#rightArrow').addClass('show');
+            else
+                $('#rightArrow').removeClass('show');
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
+                if (parseInt(data) > 0) {
+                    $('#leftArrow').addClass('show');
+                }
+                else
+                    $('#leftArrow').removeClass('show');
+            })
             try {
                 clearTimeout(timer);
             } catch (e) {}
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
+                return;
             timer = setTimeout(function () {
-                $('.arrow').removeClass('show');
+                if (!currentIsVideo)
+                    $('.arrowImg').removeClass('show');
             }, 500);
-        });
+        }
+        $(window).on('mousemove', onMouseMove);
         var bubbleIframeMouseMove = function( iframe ){
 
             iframe.contentWindow.addEventListener('mousemove', function( event ) {
@@ -238,7 +251,7 @@
             xmlHttp.open("GET", theUrl, true); // true for asynchronous
             xmlHttp.send(null);
         }
-        var translateElementX = function(id1, id2, direction, array, index, isDataBase)
+        var translateElementX = function(id1, id2, direction, array, index, isDataBase, isVideo)
         {
             var element1 = $('#'+ id1);
             var element2 = $('#'+ id2);
@@ -276,20 +289,23 @@
                         else
                             element2[0].src = "nothingMore.html";
                     }
-                    bubbleIframeMouseMove(document.getElementById('homePage'));
                     setTimeout(function() {
                         element1.css({'visibility': 'visible'});
                         setTimeout(function(){
                             element1.removeClass('noTransition');
                             element2.removeClass('noTransition');
-                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                            if (!currentIsVideo)
+                                bubbleIframeMouseMove(document.getElementById('homePage'));
+                            currentIsVideo = isVideo;
+                            if (currentIsVideo)
+                                onMouseMove();
                         }, 200);
                     }, 50);
                 }, 50);
             }, 1950);
         }
 
-        var translateElementY = function(id1, id2, direction, array, index)
+        var translateElementY = function(id1, id2, direction, array, index, isVideo)
         {
             var element1 = $('#'+ id1);
             var element2 = $('#'+ id2);
@@ -325,7 +341,11 @@
                         setTimeout(function(){
                             element1.removeClass('noTransition');
                             element2.removeClass('noTransition');
-                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                            if (!currentIsVideo)
+                                bubbleIframeMouseMove(document.getElementById('homePage'));
+                            currentIsVideo = isVideo;
+                            if (currentIsVideo)
+                                onMouseMove();
                         }, 200);
                     }, 50);
                 }, 50);
@@ -370,7 +390,7 @@
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
-                translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex);
+                translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex, videoUp[videoUpIndex - 1].indexOf("vimeo") !== -1);
             }
         }
         document.getElementById("downArrow").onmouseup = function()
@@ -386,7 +406,7 @@
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
-                translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex);
+                translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex, videoDown[videoDownIndex - 1].indexOf("vimeo") !== -1);
             }
         }
         document.getElementById("leftArrow").onmouseup = function()
@@ -394,7 +414,6 @@
             if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
                 return;
             httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
-                console.log(data);
                 if (parseInt(data) > 0) {
                     dataBaseIndex++;
                     videoUpIndex = 0;
@@ -407,7 +426,7 @@
                         localStorage.setItem("range1", dataBaseIndex * 48);
                     else
                         localStorage.setItem("range2", dataBaseIndex * 48);
-                    translateElementX('homePage', 'dataBase1', 1, dataBase, dataBaseIndex, true);
+                    translateElementX('homePage', 'dataBase1', 1, dataBase, dataBaseIndex, true, false);
                 }
             })
 
@@ -425,7 +444,7 @@
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
-                translateElementX('homePage', 'documents1', -1, documents, documentsIndex, true);
+                translateElementX('homePage', 'documents1', -1, documents, documentsIndex, false, documents[documentsIndex - 1].indexOf("vimeo") !== -1);
             }
         }
     </script>
