@@ -226,6 +226,10 @@
                     $('.arrowImg').removeClass('show');
             }, 500);
         }
+        document.getElementById('homePage').onload = function()
+        {
+            $('#homePage').css({'visibility': 'visible'});
+        };
         $(window).on('mousemove', onMouseMove);
         var bubbleIframeMouseMove = function( iframe ){
 
@@ -289,18 +293,16 @@
                         else
                             element2[0].src = "nothingMore.html";
                     }
-                    setTimeout(function() {
-                        element1.css({'visibility': 'visible'});
-                        setTimeout(function(){
-                            element1.removeClass('noTransition');
-                            element2.removeClass('noTransition');
-                            if (!currentIsVideo)
-                                bubbleIframeMouseMove(document.getElementById('homePage'));
-                            currentIsVideo = isVideo;
-                            if (currentIsVideo)
-                                onMouseMove();
-                        }, 200);
-                    }, 50);
+
+                    setTimeout(function(){
+                        element1.removeClass('noTransition');
+                        element2.removeClass('noTransition');
+                        if (!currentIsVideo)
+                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                        currentIsVideo = isVideo;
+                        if (currentIsVideo)
+                            onMouseMove();
+                    }, 200);
                 }, 50);
             }, 1950);
         }
@@ -336,18 +338,15 @@
                         element2[0].src = array[index];
                     else
                         element2[0].src = "nothingMore.html";
-                    setTimeout(function() {
-                        element1.css({'visibility': 'visible'});
-                        setTimeout(function(){
-                            element1.removeClass('noTransition');
-                            element2.removeClass('noTransition');
-                            if (!currentIsVideo)
-                                bubbleIframeMouseMove(document.getElementById('homePage'));
-                            currentIsVideo = isVideo;
-                            if (currentIsVideo)
-                                onMouseMove();
-                        }, 200);
-                    }, 50);
+                    setTimeout(function(){
+                        element1.removeClass('noTransition');
+                        element2.removeClass('noTransition');
+                        if (!currentIsVideo)
+                            bubbleIframeMouseMove(document.getElementById('homePage'));
+                        currentIsVideo = isVideo;
+                        if (currentIsVideo)
+                            onMouseMove();
+                    }, 200);
                 }, 50);
             }, 1950);
         }
