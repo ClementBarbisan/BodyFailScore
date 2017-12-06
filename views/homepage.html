@@ -156,12 +156,12 @@
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
     <div class="arrow" style="position:fixed; top:0;left:50vw;transform: translate(-50%, 0);">
-        <div class="arrowImg" id="upArrow" style="font-size: 24px; height: 27px; font-family: myFont">Diffordance
+        <div class="arrowImg" id="upArrow" style="font-size: 24px; height: 27px; font-family: myFont">Dysfordance
             <img style="width: 100%" src="arrow.png">
         </div>
     </div>
     <div class="arrow" style="position:fixed; bottom:0; left:50vw; transform: translate(-50%, 0);">
-        <div class="arrowImg" id="downArrow" style="font-size: 24px; height: 27px; font-family: myFont">Diffordance
+        <div class="arrowImg" id="downArrow" style="font-size: 24px; height: 27px; font-family: myFont">Dysfordance
             <img style="width: 100%" src="arrow.png">
         </div>
     </div>
@@ -196,7 +196,8 @@
         var currentIsVideo = false;
         var onMouseMove = function () {
             //console.log("test");
-
+            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg" )
+                return;
             if (videoUpIndex < videoUp.length)
                 $('#upArrow').addClass('show');
             else
@@ -219,7 +220,7 @@
             try {
                 clearTimeout(timer);
             } catch (e) {}
-            if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg" || currentIsVideo)
+            if (currentIsVideo)
                 return;
             timer = setTimeout(function () {
                 $('.arrowImg').removeClass('show');
