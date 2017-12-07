@@ -10,6 +10,10 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+			@font-face {
+				font-family: myFont;
+				src: url('/fonts/MarfaFontlinealregular-663wt_regularTwo.otf');
+			}
 			#info {
 				position: absolute;
 				top: 0px;
@@ -22,11 +26,11 @@
 
 			.defile {
 				display: inline;
-				-webkit-animation:linear marqueelike 20s infinite ;
-				-moz-animation:linear marqueelike 20s infinite ;
-				-o-animation:linear marqueelike 20s infinite ;
-				-ms-animation:linear marqueelike 20s infinite ;
-				animation:linear marqueelike 20s infinite ;
+				-webkit-animation:linear marqueelike 25s infinite ;
+				-moz-animation:linear marqueelike 25s infinite ;
+				-o-animation:linear marqueelike 25s infinite ;
+				-ms-animation:linear marqueelike 25s infinite ;
+				animation:linear marqueelike 25s infinite ;
 				margin-left:-100%;
 				padding:0 5px;
 				text-align:left;
@@ -35,26 +39,25 @@
 				white-space:nowrap;
 				overflow: hidden;
 			}
-
 			@-webkit-keyframes marqueelike {
-				0%, 100% {margin-left:100%;}
-				99.99% {margin-left:-200%;}
+				0%, 100% {margin-left:0%;}
+				99.99% {margin-left:-100%;}
 			}
 			@-moz-keyframes marqueelike {
-				0%, 100% {margin-left:100%;}
-				99.99% {margin-left:-200%;}
+				0%, 100% {margin-left:0%;}
+				99.99% {margin-left:-100%;}
 			}
 			@-o-keyframes marqueelike {
-				0%, 100% {margin-left:100%;}
-				99.99% {margin-left:-200%;}
+				0%, 100% {margin-left:0%;}
+				99.99% {margin-left:-100%;}
 			}
 			@-ms-keyframes marqueelike {
-				0%, 100% {margin-left:100%;}
-				99.99% {margin-left:-200%;}
+				0%, 100% {margin-left:0%;}
+				99.99% {margin-left:-100%;}
 			}
 			@keyframes marqueelike {
-				0%, 100% {margin-left:100%;}
-				99.99% {margin-left:-200%;}
+				0%, 100% {margin-left:0%;}
+				99.99% {margin-left:-100%;}
 			}
 
 			@media only screen and (max-width: 860px) {
@@ -326,7 +329,7 @@
 	</script>
 	</body>
 
-	<div style="border:2px solid black; background-color: white;position: fixed; bottom: 0;">
+	<div style="border:2px solid black; background-color: white;position: fixed; bottom: 0;font-family: myFont">
 		<span class="defile">PARTITION D'ERREURS 	La partition d'erreurs est la collecte, l'affichage et le partage des gestuelles par l'intermédiaire d'une plateforme internet de diffusion sur un mode viral. Notice de gestes de contournement du système. Le Final sera une lecture, interprétation et interpolation par des performeurs de la partition de mouvements collectés.</span>
 	</div>
 
