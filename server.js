@@ -145,11 +145,11 @@ app.get('/get_data', function (req, res) {
     }
 });
 
-app.get('/', function (req, res) {
+app.get('/database', function (req, res) {
     res.render('index.html');
 });
 
-app.get('/homepage', function (req, res) {
+app.get('/', function (req, res) {
     res.render('homepage.html');
 });
 
