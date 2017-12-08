@@ -403,7 +403,9 @@
                 var iframe = document.getElementById("homePage");
                 iframe.src = currentSource;
                 img.src = "cross_white.jpg";
-                bubbleIframeMouseMove(iframe);
+                iframe.onload = function() {
+                    bubbleIframeMouseMove(iframe);
+                };
             }
         }
         document.getElementById("upArrow").onmouseup = function()
