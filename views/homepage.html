@@ -175,7 +175,7 @@
             <img style="width: 100%" src="arrow.png">
         </div>
     </div>
-    <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 27px; height: 27px;">
+    <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 29px; height: 29px;">
         <img id="imgCross" src="cross_white.jpg">
     </div>
     <script>
@@ -216,6 +216,15 @@
                 }
                 else
                     $('#leftArrow').removeClass('show');
+                try {
+                    clearTimeout(timer);
+                } catch (e) {}
+                if (currentIsVideo)
+                    return;
+                timer = setTimeout(function () {
+                    $('.arrowImg').removeClass('show');
+                }, 500);
+                return;
             })
             try {
                 clearTimeout(timer);
