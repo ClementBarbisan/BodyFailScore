@@ -401,9 +401,9 @@
             else
             {
                 var iframe = document.getElementById("homePage");
-                bubbleIframeMouseMove(iframe);
-                img.src = "cross_white.jpg";
                 iframe.src = currentSource;
+                img.src = "cross_white.jpg";
+                bubbleIframeMouseMove(iframe);
             }
         }
         document.getElementById("upArrow").onmouseup = function()
