@@ -392,9 +392,9 @@
             var img = document.getElementById("imgCross");
             if(img.getAttribute('src') === "cross_white.jpg")
             {
+                img.src = "cross_black.jpg";
                 var iframe = document.getElementById("homePage");
                 currentSource = iframe.src;
-                img.src = "cross_black.jpg";
                 iframe.src = "details.html";
                 $('.arrowImg').removeClass('show');
             }
