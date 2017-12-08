@@ -210,21 +210,12 @@
                 $('#rightArrow').addClass('show');
             else
                 $('#rightArrow').removeClass('show');
-            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
+            httpGetSync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
                 if (parseInt(data) > 0) {
                     $('#leftArrow').addClass('show');
                 }
                 else
                     $('#leftArrow').removeClass('show');
-                try {
-                    clearTimeout(timer);
-                } catch (e) {}
-                if (currentIsVideo)
-                    return;
-                timer = setTimeout(function () {
-                    $('.arrowImg').removeClass('show');
-                }, 500);
-                return;
             })
             try {
                 clearTimeout(timer);
@@ -262,14 +253,14 @@
             });
 
         };
-        function httpGetAsync(theUrl, callback)
+        function httpGetSync(theUrl, callback)
         {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                     callback(xmlHttp.responseText);
             }
-            xmlHttp.open("GET", theUrl, true); // true for asynchronous
+            xmlHttp.open("GET", theUrl, false); // true for asynchronous
             xmlHttp.send(null);
         }
         var translateElementX = function(id1, id2, direction, array, index, isDataBase, isVideo)
@@ -450,7 +441,7 @@
         {
             if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
                 return;
-            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
+            httpGetSync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
                 if (parseInt(data) > 0) {
                     dataBaseIndex++;
                     videoUpIndex = 0;
