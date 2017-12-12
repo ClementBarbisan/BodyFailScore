@@ -1,5 +1,4 @@
+Options +FollowSymlinks
 RewriteEngine On
-RewriteRule ^$ http://127.0.0.1:8080/ [P,L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ http://127.0.0.1:8080/$1 [P,L] 
+RewriteCond %{SERVER_PORT} 80
+RewriteRule (.*) https://bodyfail.com/$1 [R]

@@ -1,8 +1,14 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
-    fs      = require('fs');
-    
+    fs      = require('fs'),
+    https   = require('https')
+
+https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.crt')
+}, app).listen(8080);
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
