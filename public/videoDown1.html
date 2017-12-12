@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
+<style>
+    html{
+        overflow: hidden;
+    }
+</style>
+<link rel="stylesheet" href="./libs/plyr.css">
 <body>
-<div>videoDown1</div>
+<div style="margin: auto;align-content: center;" id="video" data-type="vimeo" data-video-id="245880845">
+</div>
+<script src="./libs/plyr.js"></script>
+<script>plyr.setup('#video');</script>
 </body>
 </html>

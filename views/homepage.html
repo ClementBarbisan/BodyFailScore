@@ -31,38 +31,13 @@
         transition: none;
     }
 
-    #upArrow
-    {
-    }
+
     #imgCross
     {
         vertical-align: top;
         width: 100%; /* max width */
     }
-    #downArrow
-    {
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        transform: rotate(180deg);
-    }
-    #rightArrow
-    {
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        transform: rotate(90deg);
-    }
-    #leftArrow
-    {
-        -webkit-transform: rotate(270deg);
-        -moz-transform: rotate(270deg);
-        -o-transform: rotate(270deg);
-        -ms-transform: rotate(270deg);
-        transform: rotate(270deg);
-    }
+
     #homePage
     {
         /*background: #00d4b4;*/
@@ -137,42 +112,47 @@
     <title></title>
 </head>
 <body>
-    <iframe id="videoUp1" src="https://player.vimeo.com/video/245880050">
+    <iframe style="width: 100vw; height: 100vh; margin: auto; align-content: center;" id="videoUp1" src="videoUp1.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
     </iframe>
     <!--<iframe id="videoUp2">-->
     <!--</iframe>-->
-    <iframe id="videoDown1" src="https://player.vimeo.com/video/245880845">
+    <iframe style="width: 100vw; height: 100vh; margin: auto; align-content: center;" id="videoDown1" src="videoDown1.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
     </iframe>
     <!--<iframe id="videoDown2">-->
     <!--</iframe>-->
-    <iframe id="documents1" src="https://player.vimeo.com/video/245880687">
+    <iframe style="width: 100vw; height: 100vh; margin: auto; align-content: center;" id="documents1" src="videoDocuments1.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
     </iframe>
     <!--<iframe id="documents2">-->
     <!--</iframe>-->
-    <iframe style="width: 100vw; height: 100vh" id="homePage" src="home.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    <iframe style="width: 100vw; height: 100vh; margin: auto; align-content: center;" id="homePage" src="home.html" webkitallowfullscreen mozallowfullscreen allowfullscreen>
     </iframe>
     <iframe id="dataBase1" src="dataBase1.html">
     </iframe>
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
-    <div class="arrow" style="position:fixed; top:0;left:50vw;transform: translate(-50%, 0);">
-        <div class="arrowImg" id="upArrow" style="font-size: 24px; height: 27px; font-family: myFont">Dysfordance
-            <img style="width: 100%" src="arrow.png">
+
+    <div class="arrowImg" id="upArrow"style="width:100vw; position: fixed; top:0; height: 10vh; background-color: white;opacity: 0.75">
+        <div style="position:inherit; top:0;left: 50vw; height:inherit;transform: translate(-50%, 0%);">
+            <div class="arrowImg" id="upTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
+            <img style="height: 50%" src="arrow_black.png">
         </div>
     </div>
-    <div class="arrow" style="position:fixed; bottom:0; left:50vw; transform: translate(-50%, 0);">
-        <div class="arrowImg" id="downArrow" style="font-size: 24px; height: 27px; font-family: myFont">Dysfordance
-            <img style="width: 100%" src="arrow.png">
+    <div class="arrowImg" id="downArrow"style="width:100vw; position: fixed; bottom:0; height: 10vh; background-color: white;opacity: 0.75">
+        <div style="position:inherit; bottom:0;left: 50vw; height:inherit;transform: rotate(180deg) translate(50%, 0%);">
+            <div class="arrowImg" id="downTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
+            <img style="height: 50%" src="arrow_black.png">
         </div>
     </div>
-    <div class="arrow" style="position:fixed; top:50vh; left:0;transform: translate(-25%, -50%);">
-        <div class="arrowImg" id="leftArrow" style="font-size: 24px; height: 27px; font-family: myFont">Base de donnee
-            <img style="width: 100%" src="arrow.png">
+    <div class="arrowImg" id="leftArrow"style="height:80vh; position: fixed;top:0; left:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 10vh);">
+        <div style="position:inherit; left:0;bottom: 50vh; width:inherit;transform: rotate(270deg) translate(-150%, 0%);">
+            <div class="arrowImg" id="leftTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Base de donnee</div>
+            <img style="width: 100%" src="arrow_black.png">
         </div>
     </div>
-    <div class="arrow" style="position: fixed; top: 50vh; right:0;transform: translate(25%, -50%);">
-        <div class="arrowImg" id="rightArrow" style="font-size: 24px; height: 27px; font-family: myFont">Documents
-            <img style="width: 100%" src="arrow.png">
+    <div class="arrowImg" id="rightArrow"  style="height:80vh; position: fixed;top:0; right:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 10vh);">
+        <div style="position:inherit; right:0;top: 50vh; width:inherit;transform: rotate(90deg) translate(-150%, 0%);">
+            <div class="arrowImg" id="rightTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Documents</div>
+            <img style="width: 100%" src="arrow_black.png">
         </div>
     </div>
     <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 29px; height: 29px;">
@@ -184,16 +164,53 @@
             window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
         });
         var timer;
-        var videoUp = ["https://player.vimeo.com/video/245880050"];
+        var timer1;
+        var videoUp = ["videoUp1.html"];
         var videoUpIndex = 0;
-        var videoDown = ["https://player.vimeo.com/video/245880845"];
+        var videoDown = ["videoDown1.html"];
         var videoDownIndex = 0;
         var dataBase = ["dataBase1.html", "dataBase2.html"];
         var dataBaseIndex = 0;
-        var documents = ["https://player.vimeo.com/video/245880687","documents1.html","documents2.html","documents3.html","documents4.html","documents5.html","documents6.html"];
+        var documents = ["videoDocuments1.html","documents1.html","documents2.html","documents3.html","documents4.html","documents5.html","documents6.html"];
         var documentsIndex = 0;
         var currentSource = "home.html";
         var currentIsVideo = false;
+        $('#upArrow').mouseover(function(){
+           if ($('#upArrow').hasClass('show'))
+           {
+               $('#upTitle').addClass('show');
+           }
+        });
+        $('#downArrow').mouseover(function(){
+            if ($('#downArrow').hasClass('show'))
+            {
+                $('#downTitle').addClass('show');
+            }
+        });
+        $('#leftArrow').mouseover(function(){
+            if ($('#leftArrow').hasClass('show'))
+            {
+                $('#leftTitle').addClass('show');
+            }
+        });
+        $('#rightArrow').mouseover(function(){
+            if ($('#rightArrow').hasClass('show'))
+            {
+                $('#rightTitle').addClass('show');
+            }
+        });
+        $('#upArrow').mouseout(function(){
+            $('#upTitle').removeClass('show');
+        });
+        $('#downArrow').mouseout(function(){
+                $('#downTitle').removeClass('show');
+        });
+        $('#leftArrow').mouseout(function(){
+                $('#leftTitle').removeClass('show');
+        });
+        $('#rightArrow').mouseout(function(){
+                $('#rightTitle').removeClass('show');
+        });
         var onMouseMove = function () {
             //console.log("test");
             if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg" )
@@ -210,20 +227,30 @@
                 $('#rightArrow').addClass('show');
             else
                 $('#rightArrow').removeClass('show');
-            httpGetSync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
                 if (parseInt(data) > 0) {
                     $('#leftArrow').addClass('show');
                 }
                 else
                     $('#leftArrow').removeClass('show');
+                try {
+                    clearTimeout(timer1);
+                } catch (e) {}
+                //if (currentIsVideo)
+                //    return;
+                timer1 = setTimeout(function () {
+                    $('#leftArrow').removeClass('show');
+                }, 500);
             })
             try {
                 clearTimeout(timer);
             } catch (e) {}
-            if (currentIsVideo)
-                return;
+            //if (currentIsVideo)
+            //    return;
             timer = setTimeout(function () {
-                $('.arrowImg').removeClass('show');
+                $('#upArrow').removeClass('show');
+                $('#downArrow').removeClass('show');
+                $('#rightArrow').removeClass('show');
             }, 500);
         }
         document.getElementById('homePage').onload = function()
@@ -253,20 +280,26 @@
             });
 
         };
-        function httpGetSync(theUrl, callback)
+        function httpGetAsync(theUrl, callback)
         {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function() {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                     callback(xmlHttp.responseText);
             }
-            xmlHttp.open("GET", theUrl, false); // true for asynchronous
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous
             xmlHttp.send(null);
         }
         var translateElementX = function(id1, id2, direction, array, index, isDataBase, isVideo)
         {
             var element1 = $('#'+ id1);
             var element2 = $('#'+ id2);
+            if (isVideo)
+                element2.css({"background-color":"black"});
+            else
+                element2.css({"background-color":"white"});
+            if (element1[0].plyr)
+                element1[0].plyr.pause();
             element1.css({"-webkit-transform":"translate(" + 100 * direction + "vw, 0vh)"});
             element2.css({"-webkit-transform":"translate(" + 100 * direction + "vw, 0vh)"});
             element1.css({"-moz-transform":"translate(" + 100 * direction + "vw, 0vh)"});
@@ -317,10 +350,10 @@
                         element1.removeClass('noTransition');
                         element2.removeClass('noTransition');
                         currentIsVideo = isVideo;
-                        if (!currentIsVideo)
-                            bubbleIframeMouseMove(document.getElementById('homePage'));
-                        if (currentIsVideo)
-                            onMouseMove();
+                        bubbleIframeMouseMove( document.getElementById('homePage'));
+                      //  if (isVideo) {
+                        //    onMouseMove();
+                        //}
                     }, 200);
                 }, 50);
             }, 1950);
@@ -330,6 +363,12 @@
         {
             var element1 = $('#'+ id1);
             var element2 = $('#'+ id2);
+            if (isVideo)
+                element2.css({"background-color":"black"});
+            else
+                element2.css({"background-color":"white"});
+            if (element1[0].plyr)
+                element1[0].plyr.pause();
             element1.css({"-webkit-transform":"translate(0vw, " + 100 * direction + "vh)"});
             element2.css({"-webkit-transform":"translate(0vw, " + 100 * direction + "vh)"});
             element1.css({"-moz-transform":"translate(0vw, " + 100 * direction + "vh)"});
@@ -370,10 +409,7 @@
                         element1.removeClass('noTransition');
                         element2.removeClass('noTransition');
                         currentIsVideo = isVideo;
-                        if (!currentIsVideo)
-                            bubbleIframeMouseMove(document.getElementById('homePage'));
-                        if (currentIsVideo)
-                            onMouseMove();
+                        bubbleIframeMouseMove(document.getElementById('homePage'));
                     }, 200);
                 }, 50);
             }, 1950);
@@ -421,7 +457,7 @@
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
-                translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex, videoUp[videoUpIndex - 1].indexOf("vimeo") !== -1);
+                translateElementY('homePage', 'videoUp1', 1, videoUp, videoUpIndex, videoUp[videoUpIndex - 1].indexOf("video") !== -1);
             }
         }
         document.getElementById("downArrow").onmouseup = function()
@@ -437,14 +473,14 @@
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
                 document.getElementById('documents1').src = documents[documentsIndex];
-                translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex, videoDown[videoDownIndex - 1].indexOf("vimeo") !== -1);
+                translateElementY('homePage', 'videoDown1', -1, videoDown, videoDownIndex, videoDown[videoDownIndex - 1].indexOf("video") !== -1);
             }
         }
         document.getElementById("leftArrow").onmouseup = function()
         {
             if (document.getElementById("imgCross").getAttribute('src') === "cross_black.jpg")
                 return;
-            httpGetSync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data){
                 if (parseInt(data) > 0) {
                     dataBaseIndex++;
                     videoUpIndex = 0;
@@ -475,7 +511,7 @@
                 document.getElementById('videoUp1').src = videoUp[videoUpIndex];
                 document.getElementById('videoDown1').src = videoDown[videoDownIndex];
                 document.getElementById('dataBase1').src = dataBase[dataBaseIndex];
-                translateElementX('homePage', 'documents1', -1, documents, documentsIndex, false, documents[documentsIndex - 1].indexOf("vimeo") !== -1);
+                translateElementX('homePage', 'documents1', -1, documents, documentsIndex, false, documents[documentsIndex - 1].indexOf("video") !== -1);
             }
         }
     </script>
