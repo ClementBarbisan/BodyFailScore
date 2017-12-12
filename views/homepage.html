@@ -131,13 +131,13 @@
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
 
-    <div class="arrowImg" id="upArrow"style="width:100vw; position: fixed; top:0; height: 10vh; background-color: white;opacity: 0.75">
+    <div class="arrowImg" id="upArrow"style="width:110vw; position: fixed; top:0; height: 10vh; background-color: white;opacity: 0.75">
         <div style="position:inherit; top:0;left: 50vw; height:inherit;transform: translate(-50%, 0%);">
             <div class="arrowImg" id="upTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
             <img style="height: 50%" src="arrow_black.png">
         </div>
     </div>
-    <div class="arrowImg" id="downArrow"style="width:100vw; position: fixed; bottom:0; height: 10vh; background-color: white;opacity: 0.75">
+    <div class="arrowImg" id="downArrow"style="width:110vw; position: fixed; bottom:0; height: 10vh; background-color: white;opacity: 0.75">
         <div style="position:inherit; bottom:0;left: 50vw; height:inherit;transform: rotate(180deg) translate(50%, 0%);">
             <div class="arrowImg" id="downTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
             <img style="height: 50%" src="arrow_black.png">
@@ -163,6 +163,7 @@
         window.addEventListener('resize', function() {
             window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
         });
+        var lengthDataBase = 0;
         var timer;
         var timer1;
         var videoUp = ["videoUp1.html"];
@@ -227,32 +228,26 @@
                 $('#rightArrow').addClass('show');
             else
                 $('#rightArrow').removeClass('show');
-            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
-                if (parseInt(data) > 0) {
-                    $('#leftArrow').addClass('show');
-                }
-                else
-                    $('#leftArrow').removeClass('show');
-                try {
-                    clearTimeout(timer1);
-                } catch (e) {}
-                //if (currentIsVideo)
-                //    return;
-                timer1 = setTimeout(function () {
-                    $('#leftArrow').removeClass('show');
-                }, 500);
-            })
+            if (lengthDataBase > 0) {
+                $('#leftArrow').addClass('show');
+            }
+            else
+                $('#leftArrow').removeClass('show');
             try {
                 clearTimeout(timer);
             } catch (e) {}
             //if (currentIsVideo)
             //    return;
             timer = setTimeout(function () {
-                $('#upArrow').removeClass('show');
-                $('#downArrow').removeClass('show');
-                $('#rightArrow').removeClass('show');
+                $('.arrowImg').removeClass('show');
             }, 500);
         }
+        document.getElementById('dataBase1').onload = function()
+        {
+            httpGetAsync("/get_range_data_length?range=" + (dataBaseIndex * 48), function(data) {
+                lengthDataBase = parseInt(data);
+            })
+        };
         document.getElementById('homePage').onload = function()
         {
             $('#homePage').css({'visibility': 'visible'});
