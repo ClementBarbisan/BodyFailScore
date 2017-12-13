@@ -2,12 +2,15 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
     fs      = require('fs'),
-    https   = require('https')
+    https   = require('https'),
+    http    = require('http'),
+    forceSSL = require('express-force-ssl');
 
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
+app.use(forceSSL);
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 
@@ -164,12 +167,11 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
+http.createServer(app).listen(port);
 https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.csr'),
-    ca: [fs.readFileSync('intermediateCert.cer')]
-}, app).listen(8080);
+    ca: fs.readFileSync('intermediateCert.cer')
+}, app).listen(443);
 
 module.exports = app ;
