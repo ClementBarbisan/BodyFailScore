@@ -6,7 +6,7 @@ var express = require('express'),
 
 https.createServer({
     key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.crt')
+    cert: fs.readFileSync('server.csr')
 }, app).listen(8080);
 
 Object.assign=require('object-assign')
