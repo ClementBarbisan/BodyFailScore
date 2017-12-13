@@ -4,11 +4,6 @@ var express = require('express'),
     fs      = require('fs'),
     https   = require('https')
 
-//https.createServer({
-//    key: fs.readFileSync('server.key'),
-//    cert: fs.readFileSync('server.csr')
-//}, app).listen(8080);
-
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -171,5 +166,10 @@ initDb(function(err){
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
+https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.csr'),
+    ca: [fs.readFileSync('intermediateCert.cer')]
+}, app).listen(8080);
 
 module.exports = app ;
