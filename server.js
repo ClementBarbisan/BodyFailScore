@@ -4,10 +4,10 @@ var express = require('express'),
     fs      = require('fs'),
     https   = require('https')
 
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.csr')
-}, app).listen(8080);
+//https.createServer({
+//    key: fs.readFileSync('server.key'),
+//    cert: fs.readFileSync('server.csr')
+//}, app).listen(8080);
 
 Object.assign=require('object-assign')
 
