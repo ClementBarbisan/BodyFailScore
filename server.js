@@ -4,7 +4,9 @@ var express = require('express'),
     fs      = require('fs'),
     https   = require('https'),
     http    = require('http'),
-    forceSSL = require('express-force-ssl');
+    forceSSL = require('express-force-ssl'),
+    oplogEmitter = require('oplog-emitter'),
+    emitter = null;
 
 Object.assign=require('object-assign')
 
@@ -18,6 +20,14 @@ var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0',
     mongoURL = process.env.MONGO_URL,
     mongoURLLabel = "";
+http.createServer(app).listen(port);
+var server = https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.csr'),
+    ca: fs.readFileSync('intermediateCert.cer')
+}, app).listen(443);
+
+var io = require('socket.io')(server);
 
 if (mongoURL == null) {
   var mongoHost = 'localhost',
@@ -39,6 +49,13 @@ if (mongoURL == null) {
 }
 var db = null,
     dbDetails = new Object();
+emitter = new oplogEmitter('mongodb://127.0.0.1:27017/local');
+
+emitter.on('insert', function()
+{
+    io.sockets.emit('reload', {value: true});
+    console.log('insert to database');
+});
 
 var initDb = function(callback) {
   if (mongoURL == null) return;
@@ -166,12 +183,5 @@ app.use(function(err, req, res, next){
 initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
-
-http.createServer(app).listen(port);
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.csr'),
-    ca: fs.readFileSync('intermediateCert.cer')
-}, app).listen(443);
 
 module.exports = app ;

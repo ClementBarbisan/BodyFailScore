@@ -158,6 +158,7 @@
     <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 29px; height: 29px;">
         <img id="imgCross" src="cross_white.jpg">
     </div>
+    <script src="/libs/socket.io.slim.js"></script>
     <script>
         window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
         window.addEventListener('resize', function() {
@@ -176,6 +177,14 @@
         var documentsIndex = 0;
         var currentSource = "home.html";
         var currentIsVideo = false;
+        var socket = io('https://localhost');
+
+        socket.on('reload', function(data){
+            if (data)
+            {
+                location.reload();
+            }
+        });
         $('#upArrow').mouseover(function(){
            if ($('#upArrow').hasClass('show'))
            {
@@ -426,12 +435,15 @@
                 img.src = "cross_black.jpg";
                 var iframe = document.getElementById("homePage");
                 currentSource = iframe.src;
+                iframe.css({"background-color":"white"});
                 iframe.src = "details.html";
                 $('.arrowImg').removeClass('show');
             }
             else
             {
                 var iframe = document.getElementById("homePage");
+                if (currentIsVideo)
+                    iframe.css({"background-color":"black"});
                 iframe.src = currentSource;
                 img.src = "cross_white.jpg";
                 iframe.onload = function() {

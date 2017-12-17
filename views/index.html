@@ -2,7 +2,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="refresh" content=30>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
@@ -86,8 +85,16 @@
 		<div id="container"></div>
 		<script src="/libs/three.min.js"></script>
 		<script src="/libs/jquery-3.2.1.min.js"></script>
+		<script src="/libs/socket.io.slim.js"></script>
 		<script>
+		var socket = io('https://localhost');
 
+		socket.on('reload', function(data){
+			if (data)
+			{
+				location.reload();
+			}
+		});
 		var jsonDataBaseFile = [];
 		function httpGetAsync(theUrl, callback)
 		{
