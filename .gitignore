@@ -10,5 +10,3 @@ BodyFailScore.iml
 .idea/.name
 .idea/uiDesigner.xml
 server.key
-server.csr
-intermediateCert.cer
