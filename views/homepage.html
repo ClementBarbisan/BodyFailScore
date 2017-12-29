@@ -131,28 +131,36 @@
     <!--<iframe id="dataBase2">-->
     <!--</iframe>-->
 
-    <div class="arrowImg" id="upArrow"style="width:100vw; position: fixed; top:0; left:0; height: 10vh; background-color: white;opacity: 0.75">
-        <div style="position:inherit; top:0;left: 50vw; height:inherit;transform: translate(-50%, 0%);">
-            <div class="arrowImg" id="upTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
-            <img style="height: 50%" src="arrow_black.png">
+    <div class="arrowImg" id="upArrow"style="width:100vw; position: fixed; top:0; left:0; height: 5vh; background-color: white;opacity: 0.75">
+        <div style="position:inherit; top:0;left: 50vw; height:inherit;">
+            <div style="position:inherit; height:inherit; transform: translate(0%, 0%);">
+                <div class="arrowImg" id="upTitle"style="position: inherit;font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
+                <img style="position: inherit; height: inherit;" src="arrow_black.png">
+            </div>
         </div>
     </div>
-    <div class="arrowImg" id="downArrow"style="width:100vw; position: fixed; bottom:0; left:0; height: 10vh; background-color: white;opacity: 0.75">
-        <div style="position:inherit; bottom:0;left: 50vw; height:inherit;transform: rotate(180deg) translate(50%, 0%);">
-            <div class="arrowImg" id="downTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Dysfordance</div>
-            <img style="height: 50%" src="arrow_black.png">
+    <div class="arrowImg" id="downArrow"style="width:100vw; position: fixed; bottom:0; left:0; height: 5vh; background-color: white;opacity: 0.75">
+        <div style="position:inherit; bottom:0;left: 50vw; height:inherit;transform: rotate(180deg);">
+            <div style="position:inherit; height:inherit; transform: translate(0%, 0%);">
+                <div class="arrowImg" id="downTitle"style="position:inherit;font-size: 24px; height: 27px; font-family: myFont;transform: rotate(180deg);">Dysfordance</div>
+                <img style="position:inherit;height: inherit;" src="arrow_black.png">
+            </div>
         </div>
     </div>
-    <div class="arrowImg" id="leftArrow"style="height:80vh; position: fixed;top:0; left:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 10vh);">
-        <div style="position:inherit; left:0;bottom: 50vh; width:inherit;transform: rotate(270deg) translate(-150%, 0%);">
-            <div class="arrowImg" id="leftTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Base de donnee</div>
-            <img style="width: 100%" src="arrow_black.png">
+    <div class="arrowImg" id="leftArrow"style="height:90vh; position: fixed;top:0; left:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 5vh);">
+        <div style="position:inherit; left:0;bottom: 50vh; width:inherit;transform: rotate(270deg);">
+            <div style="position:inherit; width:inherit; transform: translate(0%, 0%);">
+                <div class="arrowImg" id="leftTitle"style="position:inherit; font-size: 24px; height: 27px; white-space: nowrap; font-family: myFont;">Base de donnee</div>
+                <img style="position: inherit;width: inherit;" src="arrow_black.png">
+            </div>
         </div>
     </div>
-    <div class="arrowImg" id="rightArrow"  style="height:80vh; position: fixed;top:0; right:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 10vh);">
-        <div style="position:inherit; right:0;top: 50vh; width:inherit;transform: rotate(90deg) translate(-150%, 0%);">
-            <div class="arrowImg" id="rightTitle"style="font-size: 24px; height: 27px; font-family: myFont;">Documents</div>
-            <img style="width: 100%" src="arrow_black.png">
+    <div class="arrowImg" id="rightArrow"  style="height:90vh; position: fixed;top:0; right:0; width: 5vw; background-color: white;opacity: 0.75; transform: translate(0%, 5vh);">
+        <div style="position:inherit; right:0;top: 50vh; width:inherit;transform: rotate(90deg);">
+            <div style="position:inherit; width:inherit; transform: translate(-50%, 0%);">
+                <div class="arrowImg" id="rightTitle"style="position:inherit;font-size: 24px; height: 27px; font-family: myFont;">Documents</div>
+                <img style="position:inherit; width: inherit;" src="arrow_black.png">
+            </div>
         </div>
     </div>
     <div id="cross" style="border:2px solid black; position:fixed; bottom: 2px;right: 0;width: 29px; height: 29px;">
@@ -160,9 +168,13 @@
     </div>
     <script src="/libs/socket.io.slim.js"></script>
     <script>
-        window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
+        window.onload = document.getElementById("homePage").scrollIntoView(true);
+        document.getElementById("homePage").scrollIntoView(true);
         window.addEventListener('resize', function() {
-            window.scrollTo($(document).width() / 2 - $(window).width() / 2, $(document).height() / 2 - $(window).height() / 2);
+            document.getElementById("homePage").scrollIntoView(true);
+        });
+        window.addEventListener('fullscreenchange', function() {
+            document.getElementById("homePage").scrollIntoView(true);
         });
         var lengthDataBase = 0;
         var timer;
