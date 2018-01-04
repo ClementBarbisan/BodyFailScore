@@ -275,10 +275,8 @@
 //			splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
 //			parent.add( splineCamera );
 			var index = 0;
-			for (var i = 1; i <= nbWidth && index < jsonDataBaseFile.length; i++)
-			{
-				for (var j = 1; j <= nbHeight && index < jsonDataBaseFile.length; j++)
-				{
+			for (var j = 1; j <= (nbHeight) && index < jsonDataBaseFile.length; j++) {
+				for (var i = 1; i <= (nbWidth) && index < jsonDataBaseFile.length; i++) {
 					addTube(i, j, index, font);
 					index++;
 				}
@@ -329,7 +327,7 @@
 	</script>
 	</body>
 
-	<div id="upperElement" style="border:2px solid black; background-color: white;position: fixed; bottom: 0;font-family: myFont">
+	<div id="upperElement" style="background-color: black;position: fixed; bottom: 0; font-family: myFont; color: white;left:0">
 		<span class="defile">                                               PARTITION D'ERREURS 	La partition d'erreurs est la collecte, l'affichage et le partage des gestuelles par l'intermédiaire d'une plateforme internet de diffusion sur un mode viral. Notice de gestes de contournement du système. Le Final sera une lecture, interprétation et interpolation par des performeurs de la partition de mouvements collectés.                                           </span>
 	</div>
 
