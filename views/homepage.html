@@ -168,16 +168,20 @@
     </div>
     <script src="/libs/socket.io.slim.js"></script>
     <script>
-        document.onload = document.getElementById("homePage").scrollIntoView(true);
+        document.onload = function(){
+            window.scrollTo($(window).width(), $(window).height());
+            window.resizeTo(document.getElementById("homePage").width, document.getElementById("homePage").height);
+        };
         setInterval(function()
         {
-            document.getElementById("homePage").scrollIntoView(true);
+            window.scrollTo($(window).width(), $(window).height());
+            window.resizeTo(document.getElementById("homePage").width, document.getElementById("homePage").height);
         },1000);
         window.addEventListener('resize', function() {
-            document.getElementById("homePage").scrollIntoView(true);
+            window.scrollTo($(window).width(), $(window).height());
         });
         window.addEventListener('fullscreenchange', function() {
-            document.getElementById("homePage").scrollIntoView(true);
+            window.scrollTo($(window).width(), $(window).height());
         });
         var lengthDataBase = 0;
         var timer;
