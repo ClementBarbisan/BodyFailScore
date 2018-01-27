@@ -170,6 +170,10 @@ app.get('/database', function (req, res) {
     res.render('index.html');
 });
 
+app.get('/portable', function (req, res) {
+    res.render('portable.html');
+});
+
 app.get('/', function (req, res) {
     res.render('homepage.html');
 });

@@ -206,14 +206,15 @@
             }
 
             // iOS detection from: http://stackoverflow.com/a/9039885/177710
-            if (/iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 return true;
             }
 
             return false;
         }
-        if (getMobileOperatingSystem())
-            $('.bugImg').addClass('showBug');
+        if (getMobileOperatingSystem()) {
+            window.location.href = "https://bodyfail.com/portable";
+        }
         socket.on('reload', function(data){
             if (data && !getMobileOperatingSystem())
             {
@@ -247,18 +248,12 @@
         var videoDownIndex = 0;
         var dataBase = ["dataBase1.html", "dataBase2.html"];
         var dataBaseIndex = 0;
-        var documents = ["videoDocuments1.html","documents1.html","documents2.html","documents3.html","documents4.html","documents5.html","documents6.html"];
+        var documents = ["videoDocuments1.html", "videoDocuments2.html","documents1.html","documents2.html","documents3.html","documents4.html","documents5.html","documents6.html"];
         var documentsIndex = 0;
         var currentSource = "home.html";
         var currentIsVideo = false;
         var socket = io('https://localhost');
 
-        socket.on('reload', function(data){
-            if (data)
-            {
-                location.reload();
-            }
-        });
         $('#upArrow').mouseover(function(){
            if ($('#upArrow').hasClass('show'))
            {
