@@ -318,9 +318,6 @@
 				tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
 				addGeometry(tubeGeometry);
 				
-				tubeGeometry = new THREE.TubeBufferGeometry(extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed);
-				tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
-				addGeometry(tubeGeometry);
 			}
 			setScale();
 		}
