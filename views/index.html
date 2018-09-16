@@ -317,6 +317,9 @@
 					new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n12.x) * 100, parseFloat(jsonDataBase.skeleton.n12.y) * 100, parseFloat(jsonDataBase.skeleton.n12.z) * 100),
 					new THREE.Vector3(parseFloat(jsonDataBase.skeleton.n15.x) * 100, parseFloat(jsonDataBase.skeleton.n15.y) * 100, parseFloat(jsonDataBase.skeleton.n15.z) * 100),
 				]);
+				tubeGeometry = new THREE.TubeBufferGeometry(extrudePath, params.extrusionSegments, 1, params.radiusSegments, params.closed);
+				tubeGeometry.translate(x * ($(window).width() / (nbWidth + 2)), (nbHeight - y) * ($(window).height() / (nbHeight + 1.5)) + ($(window).height() / (nbHeight / 1.1)), 0);
+				addGeometry(tubeGeometry);
 			}
 			setScale();
 		}
