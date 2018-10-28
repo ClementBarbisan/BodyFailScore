@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Floating window</title>
+	<style type="text/css">
+	body{
+		background-image:url('../../images/heading3.gif');
+		background-repeat:no-repeat;
+		padding-top:85px;	
+
+	}
+	body,html{
+		width:100%;
+		height:100%;
+		margin:0px;
+		
+		
+	}
+
+	a{
+		color:blue;
+	}
+	</style>
+	<link rel="stylesheet" href="css/floating-window.css" media="screen" type="text/css">
+	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript" src="js/floating-window.js">
+	/************************************************************************************************************
+	(C) www.dhtmlgoodies.com, September 2005
+	
+	This is a script from www.dhtmlgoodies.com. You will find this and a lot of other scripts at our website.	
+	
+	Terms of use:
+	You are free to use this script as long as the copyright message is kept intact. However, you may not
+	redistribute, sell or repost it without our permission.
+	
+	Thank you!
+	
+	www.dhtmlgoodies.com
+	Alf Magne Kalleland
+	
+	************************************************************************************************************/
+	
+	</script>
+</head>
+<body>
+
+<!-- This is the code of the first window
+	You only have to change the content part
+	-->
+
+<div class="dhtmlgoodies_window">
+	<div class="dhtmlgoodies_window_top">
+		<img src="images/top_left.gif" align="left">
+		<img src="images/top_center.gif" class="topCenterImage">
+		<div class="top_buttons">
+			<img class="minimizeButton" src="images/minimize.gif">
+			<img class="closeButton" src="images/close.gif">
+			<img src="images/top_right.gif">
+		</div>
+	</div>
+	<div class="dhtmlgoodies_windowMiddle">
+		<div class="dhtmlgoodies_windowContent">
+		<!-- This is where you put the content -->
+		Try to resize and/or move the window. Then refresh the page. As you can see, the script remember the size and position of the floating windows.
+		<!-- End of where you put the content -->
+		</div>
+	</div>	
+	<div class="dhtmlgoodies_window_bottom">
+		<img class="resizeImage" src="images/bottom_right.gif">
+	</div>
+</div>
+
+
+<!-- This is the code of the second window
+	You only have to change the content part
+	-->
+
+<div class="dhtmlgoodies_window">
+	<div class="dhtmlgoodies_window_top">
+		<img src="images/top_left.gif" align="left">
+		<img src="images/top_center.gif" class="topCenterImage">
+		<div class="top_buttons">
+			<img class="minimizeButton" src="images/minimize.gif">
+			<img class="closeButton" src="images/close.gif">
+			<img src="images/top_right.gif">
+		</div>
+	</div>
+	<div class="dhtmlgoodies_windowMiddle">
+		<div class="dhtmlgoodies_windowContent">
+		<!-- This is where you put the content -->
+		You is a floating window. You can resize it or move it as you want. 
+		<!-- End of where you put the content -->
+		</div>
+	</div>	
+	<div class="dhtmlgoodies_window_bottom">
+		<img class="resizeImage" src="images/bottom_right.gif">
+	</div>
+</div>
+
+<!-- This is the code of the first window
+	You only have to change the content part
+	-->
+<div class="dhtmlgoodies_window">
+	<div class="dhtmlgoodies_window_top">
+		<img src="images/top_left.gif" align="left">
+		<img src="images/top_center.gif" class="topCenterImage">
+		<div class="top_buttons">
+			<img class="minimizeButton" src="images/minimize.gif">
+			<img class="closeButton" src="images/close.gif">
+			<img src="images/top_right.gif">
+		</div>
+	</div>
+	<div class="dhtmlgoodies_windowMiddle">
+		<div class="dhtmlgoodies_windowContent">
+		<!-- This is where you put the content -->
+		This script have been tested in Internet Explorer, Firefox and Opera
+		<form>
+		<select name="mySelect">
+			<option value="1">DHTML</option>
+			<option value="1">CSS</option>
+			<option value="1">Javascript</option>
+		</select>
+		</form>
+		This select box is here just to show you that this window script manage to cover selectboxes in IE. 
+		<!-- End of where you put the content -->
+		</div>
+	</div>	
+	<div class="dhtmlgoodies_window_bottom">
+		<img class="resizeImage" src="images/bottom_right.gif">
+	</div>
+</div>
+
+<a href="#" onclick="customFunctionCreateWindow(false,150,300,300,300);return false">Create new window dynamically</a><br>
+<a href="#" onclick="customFunctionCreateWindow('externalfile.html',200,200,100,100);return false">Create new window dynamically(get data from external file)</a>
+
+
+<script type="text/javascript">
+// Setting initial size of windows
+// These values could be overridden by cookies.
+windowSizeArray[1] = [200,400];	// Size of first window
+windowPositionArray[1] = [200,200]; // X and Y position of first window
+windowSizeArray[2] = [150,250];	// Size of second window
+windowPositionArray[2] = [500,300]; // X and Y position of first window
+windowSizeArray[3] = [140,100];	// Size of third window
+windowPositionArray[3] = [50,500]; // X and Y position of first window
+
+</script>
+</body>
+</html>

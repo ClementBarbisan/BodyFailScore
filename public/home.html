@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
-<script src="fenetrage.js"></script>
 
 <style>
     html
@@ -228,20 +227,25 @@
 
 </style>
 <body>
-<div class="fenetre" style="top: 190px; left: 512px; z-index: 3; cursor: auto; transition-duration: 0.2s;">
-    <div>
-        <div class="menu">
-            <span class="titre"></span>
-            <span class="bouton fermer"></span>
-            <span class="bouton minmax"></span>
-            <span class="bouton reduire"></span>
+<div class="dhtmlgoodies_window">
+    <div class="dhtmlgoodies_window_top">
+        <img src="images/top_left.gif" align="left">
+        <img src="images/top_center.gif" class="topCenterImage">
+        <div class="top_buttons">
+            <img class="minimizeButton" src="images/minimize.gif">
+            <img class="closeButton" src="images/close.gif">
+            <img src="images/top_right.gif">
         </div>
-        <div class="content">
-            Exposition à la fondation EDF pour le prix Pulsar.
-            Exposition à la pyramide du Louvre pour la soirée annuelle Accenture.
-            Exposition à la galerie du Crous pour l'exposition peronnelle de Thomas Guillemet.
-            Exposition à la résidence de l'ambassadeur à Abu Dhabi.
+    </div>
+    <div class="dhtmlgoodies_windowMiddle">
+        <div class="dhtmlgoodies_windowContent">
+            <!-- This is where you put the content -->
+            This script have been tested in Internet Explorer, Firefox and Opera
+            <!-- End of where you put the content -->
         </div>
+    </div>
+    <div class="dhtmlgoodies_window_bottom">
+        <img class="resizeImage" src="images/bottom_right.gif">
     </div>
 </div>
 <div style="font-family: myFontBold; font-size: 1000% ">BODYFAIL</div>
