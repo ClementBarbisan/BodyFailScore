@@ -2,9 +2,7 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
     fs      = require('fs'),
-    https   = require('https'),
     http    = require('http'),
-    forceSSL = require('express-force-ssl'),
     oplogEmitter = require('oplog-emitter'),
     emitter = null;
 
@@ -12,7 +10,6 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
-app.use(forceSSL);
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 
@@ -20,13 +17,13 @@ var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0',
     mongoURL = process.env.MONGO_URL,
     mongoURLLabel = "";
-http.createServer(app).listen(port);
-var server = https.createServer({
+var server = http.createServer(app).listen(port);
+/*var server = https.createServer({
     key: fs.readFileSync('server.key'),
     cert: fs.readFileSync('server.csr'),
     ca: fs.readFileSync('intermediateCert.cer')
 }, app).listen(443);
-
+*/
 var io = require('socket.io')(server);
 
 if (mongoURL == null) {
@@ -157,6 +154,7 @@ app.get('/get_range_data_length', function (req, res) {
     {
         initDb(function(err){});
     }
+	console.log(db);
     if (db) {
         var col = db.collection('movements');
             col.find().sort({"date": -1}).skip(parseInt(req.query.range)).limit(48).toArray().then(function (data) {
@@ -170,6 +168,7 @@ app.get('/get_range_data', function (req, res) {
     {
         initDb(function(err){});
     }
+	console.log(db);
     if (db) {
         var col = db.collection('movements');
 
@@ -185,6 +184,7 @@ app.get('/get_data', function (req, res) {
     {
         initDb(function(err){});
     }
+	console.log(db);
     if (db) {
         var col = db.collection('movements');
         col.find().sort({"date": -1}).limit(48).toArray().then(function (data) {
