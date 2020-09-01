@@ -14,8 +14,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 
 var port = process.env.PORT || 8080,
-    ip   = process.env.IP   || '0.0.0.0',
-    mongoURL = process.env.MONGO_URL,
+    ip = process.env.IP || '0.0.0.0';
+    mongoURL = null,
     mongoURLLabel = "";
 var server = http.createServer(app).listen(port);
 /*var server = https.createServer({
@@ -26,7 +26,7 @@ var server = http.createServer(app).listen(port);
 */
 var io = require('socket.io')(server);
 
-if (mongoURL == null) {
+if (mongoURL === null) {
   var mongoHost = 'localhost',
       mongoPort = 27017,
       mongoDatabase = 'bodyfailscore',
@@ -55,10 +55,10 @@ emitter.on('insert', function()
 });
 
 var initDb = function(callback) {
-  if (mongoURL == null) return;
+  if (mongoURL === null) return;
 
   var mongodb = require('mongodb');
-  if (mongodb == null) return;
+  if (mongodb === null) return;
 
   mongodb.connect(mongoURL, function(err, conn) {
     if (err) {
